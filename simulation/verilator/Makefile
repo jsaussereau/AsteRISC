@@ -30,6 +30,8 @@ OBJ_DIR = $(VER_DIR)/obj
 LOG_DIR = $(VER_DIR)/log
 TB_DIR = $(VER_DIR)/src
 
+INCLUDE_ALL_SCRIPT = $(VER_DIR)/include_all.py
+
 ENV_SET = export LC_ALL=C; unset LANGUAGE;
 
 ########################################################
@@ -137,6 +139,7 @@ $(SIM_FILE): .stamp.verilate
 	@echo "         Building Simulation          "
 	@echo "######################################"
 	@echo -e "$(_END)"
+	@python3 $(INCLUDE_ALL_SCRIPT)
 	@make -C $(OBJ_DIR) -f V$(MODULE).mk V$(MODULE) MAKEFLAGS=s --no-print-directory
 
 

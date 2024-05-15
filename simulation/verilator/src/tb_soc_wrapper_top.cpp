@@ -1,15 +1,6 @@
 #include <verilated.h>
 #include <verilated_vcd_c.h>
-#include "Vsoc_wrapper_top.h"
-#include "Vsoc_wrapper_top_soc_wrapper_top.h"
-#include "Vsoc_wrapper_top_soc_min__PBz1_PCz2_PGa_PM0.h"
-#include "Vsoc_wrapper_top_soc_min__PBz1_PCz2_PGa_PM0_PQ1.h"
-#include "Vsoc_wrapper_top_soc_sp_ram__pi3.h"
-#include "Vsoc_wrapper_top_soc_sp_ram__pi4.h"
-#include "Vsoc_wrapper_top_wrap_ram_imem__pi1.h"
-#include "Vsoc_wrapper_top_wrap_ram_dmem__pi2.h"
-
-
+#include "include_all.h"
 #include <iostream>
 #include <iomanip>
 #include <fstream>
