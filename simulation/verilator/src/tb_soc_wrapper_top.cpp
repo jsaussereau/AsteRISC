@@ -28,6 +28,7 @@
 #include <fstream>
 #include <sstream>
 #include <string>
+#include <cstdio> 
 #include <getopt.h>
 
 #define PERIOD 10 // Mettez la période en nanosecondes ici
@@ -43,6 +44,8 @@
 #define _CYAN "\x1b[36m"
 #define _WHITE "\x1b[37m"
 
+#define CPU top->soc_wrapper_top->soc_top_level->nonpipe__DOT__cpu
+
 void help() {
     std::cout << "\n" << _BOLD << "Description:\n" << _END
                  "  This program simulates AsteRISC using Verilator.\n"
@@ -52,6 +55,8 @@ void help() {
                  "  -I, --imem_depth\tPower of two representing the depth of the instruction memory.\n"
                  "  -D, --dmem_depth\tPower of two representing the depth of the data memory.\n"
                  "  -v, --vcd_file  \tPath to the output VCD file for waveform dumping.\n"
+                 "  -l, --log_file  \tPath of the CPU activity log file.\n"
+                 "  -h, --help      \tPrint this help message and exit.\n"
                  "\n" << _BOLD "Example:\n" << _END
                  "  ./Vsoc_wrapper_top --imem_file=imem.hex --dmem_file=dmem.hex --vcd_file=output.vcd --imem_depth=10 --dmem_depth=12\n\n";
 }
@@ -59,8 +64,14 @@ void help() {
 int main(int argc, char** argv) {
 
     int opt;
-    std::string imem_file_path, dmem_file_path, vcd_file_path;
-    int p_imem_depth_pw2, p_dmem_depth_pw2;
+
+    std::string imem_file_path;
+    std::string dmem_file_path;
+    std::string vcd_file_path = "./waveform.vcd";
+    std::string cpu_log_file_path = "./log/cpu_activity.log";
+
+    int p_imem_depth_pw2;
+    int p_dmem_depth_pw2;
 
     // Définition des options à lire avec getopt_long
     static struct option long_options[] = {
@@ -74,28 +85,25 @@ int main(int argc, char** argv) {
     };
 
     int option_index = 0;
-    std::cout << std::endl << _BOLD << "Options: " << _END << std::endl;
     while ((opt = getopt_long(argc, argv, "i:d:I:D:v:h", long_options, &option_index)) != -1) {
         switch (opt) {
             case 'i':
                 imem_file_path = optarg;
-                std::cout << "  imem_file = " << imem_file_path << std::endl;
                 break;
             case 'd':
                 dmem_file_path = optarg;
-                std::cout << "  dmem_file = " << dmem_file_path << std::endl;
                 break;
             case 'I':
                 p_imem_depth_pw2 = std::stoi(optarg);
-                std::cout << "  imem_depth = 2^" << p_imem_depth_pw2 << std::endl;
                 break;
             case 'D':
                 p_dmem_depth_pw2 = std::stoi(optarg);
-                std::cout << "  dmem_depth = 2^" << p_dmem_depth_pw2 << std::endl;
                 break;
             case 'v':
                 vcd_file_path = optarg;
-                std::cout << "  vcd_file_path = " << vcd_file_path << std::endl;
+                break;
+            case 'l':
+                cpu_log_file_path = optarg;
                 break;
             case 'h':
                 help();
@@ -106,14 +114,28 @@ int main(int argc, char** argv) {
         }
     }
 
-    std::cout << std::endl;
-
     // Vérifiez le nombre d'arguments
-    if (imem_file_path.empty() || dmem_file_path.empty() || vcd_file_path.empty()) {
-        std::cout << _BOLD << _RED << "error: missing required arguments" << _END << std::endl;
+    if (imem_file_path.empty() || dmem_file_path.empty()) {
+        std::cout << _BOLD << _RED << "error: missing required arguments: ";
+        if (imem_file_path.empty()) {
+            std::cout << "--imem_file";
+        } else {
+            std::cout << "--dmem_file";
+        }
+        std::cout << _END << std::endl;
         help();
         return 1;
     }
+
+    // Print options
+    std::cout << std::endl << _BOLD << "Options: " << _END << std::endl;
+    std::cout << "  imem_file = " << imem_file_path << std::endl;
+    std::cout << "  dmem_file = " << dmem_file_path << std::endl;
+    std::cout << "  imem_depth = 2^" << p_imem_depth_pw2 << std::endl;
+    std::cout << "  dmem_depth = 2^" << p_dmem_depth_pw2 << std::endl;
+    std::cout << "  vcd_file_path = " << vcd_file_path << std::endl;
+    std::cout << "  cpu_log_file_path = " << cpu_log_file_path << std::endl;
+    std::cout << std::endl;
 
     // Initialise Verilator
     Verilated::commandArgs(argc, argv);
@@ -140,7 +162,7 @@ int main(int argc, char** argv) {
     }
 
     // Chargez imem et dmem
-    for (uint32_t i = 0 ; i < (1 << top->soc_wrapper_top->p_imem_depth_pw2) ; i++) {
+    for (uint32_t i = 0 ; i < (1 << top->soc_wrapper_top->p_imem_depth_pw2) ; ++i) {
         std::string line;
         if (std::getline(imem_file, line)) {
             std::istringstream iss(line);
@@ -157,7 +179,7 @@ int main(int argc, char** argv) {
         }
     }
 
-    for (uint32_t i = 0 ; i < (1 << top->soc_wrapper_top->p_dmem_depth_pw2) ; i++) {
+    for (uint32_t i = 0 ; i < (1 << top->soc_wrapper_top->p_dmem_depth_pw2) ; ++i) {
         std::string line;
         if (std::getline(dmem_file, line)) {
             std::istringstream iss(line);
@@ -182,6 +204,21 @@ int main(int argc, char** argv) {
     top->trace(tfp, 99);
     tfp->open(vcd_file_path.c_str());
 
+    FILE *output_file_stream;
+
+    // Open the file for writing
+    output_file_stream = fopen(cpu_log_file_path.c_str(), "w");
+
+    // Check if the file stream is valid
+    if (output_file_stream == NULL) {
+        // Handle error if file cannot be opened
+        printf("Error: Unable to open file for writing.\n");
+        exit(1); // Exit the program
+    }
+
+    std::cout << _BOLD << "Log: " << _END << std::endl;
+    uint64_t last_instret = 2;
+
     // Commencez la simulation
     for (int time = 0; time < 20000; ++time) {
         // Basculez l'horloge
@@ -197,10 +234,82 @@ int main(int argc, char** argv) {
         Verilated::timeInc(PERIOD / 2);
 
         // Réinitialisez à un moment donné si nécessaire
-        if (time == 30) {
+        if (time == 6) {
             top->i_xrst = 0;
         }
+
+        bool p_bypass_log = false;
+
+        if (time%4 == 0 && !top->i_xrst) {
+
+            //std::cout << "  " << CPU->get_instr_name() << std::endl;;
+
+            // Modify your printf statements to use fprintf
+            if (CPU->get_instret() != 0 && CPU->get_instret() != last_instret) {
+                last_instret = CPU->get_instret();
+                fprintf(output_file_stream, "%0d) pc 0x%08x:\n ", CPU->get_instret(), CPU->get_pc());
+                fprintf(output_file_stream, " instr: 0x%08x > %s\n", CPU->get_instr_code(), CPU->get_instr_name().c_str());
+                if (CPU->get_br_taken()) {
+                    fprintf(output_file_stream, "  -> branch taken\n");
+                }
+                fprintf(output_file_stream, "  imm       = 0x%08x\n", CPU->get_imm());
+                fprintf(output_file_stream, "  rs1 (x%02d) = 0x%08x", CPU->get_rs1_addr(), CPU->get_rs1_data());
+                if (p_bypass_log && CPU->get_bp_rs1_ex()) {
+                    fprintf(output_file_stream, " (bp ex)\n");
+                } else if (p_bypass_log && CPU->get_bp_rs1_ma()) {
+                    if (CPU->get_stall_rs1()) {
+                        fprintf(output_file_stream, " (stall + ");
+                    } else {
+                        fprintf(output_file_stream, " (");
+                    }
+                    fprintf(output_file_stream, "bp ma)\n");
+                } else if (p_bypass_log && CPU->get_bp_rs1_wb()) {
+                    fprintf(output_file_stream, " (bp wb)\n");
+                } else {
+                    fprintf(output_file_stream, "\n");
+                }
+                if (CPU->get_rs2_used()) {
+                    fprintf(output_file_stream, "  rs2 (x%02d) = 0x%08x", CPU->get_rs2_addr(), CPU->get_rs2_data());
+                    if (p_bypass_log && CPU->get_bp_rs2_ex()) {
+                        fprintf(output_file_stream, " (bp ex)\n");
+                    } else if (p_bypass_log && CPU->get_bp_rs2_ma()) {
+                        if (CPU->get_stall_rs2()) {
+                            fprintf(output_file_stream, " (stall + ");
+                        } else {
+                            fprintf(output_file_stream, " (");
+                        }
+                        fprintf(output_file_stream, "bp ma)\n");
+                    } else if (p_bypass_log && CPU->get_bp_rs2_wb()) {
+                        fprintf(output_file_stream, " (bp wb)\n");
+                    } else {
+                        fprintf(output_file_stream, "\n");
+                    }
+                }
+                if (CPU->get_wb_en()) {
+                    fprintf(output_file_stream, "  rd  (x%02d) = 0x%08x\n", CPU->get_wb_addr(), CPU->get_wb_data());  
+                } else {
+                    //fprintf(output_file_stream, "  <<<rd  (x%02d) = 0x%08x\n", CPU->get_wb_addr(), CPU->get_wb_data());  
+                    //fprintf(output_file_stream, "\n");
+                }
+            }
+
+            int dmem_addr = top->soc_wrapper_top->soc_top_level->dmem->dmem->get_mem_addr();
+            int dmem_wr_data = top->soc_wrapper_top->soc_top_level->dmem->dmem->get_mem_wr_data();
+            if (dmem_addr == (0x0a000000 >> 2) || dmem_addr == 0x0a000000) {
+                std::cout << "  dmem wr: @" << std::hex << std::setw(8) << std::setfill('0') << dmem_addr << " = 0x"<< std::hex << std::setw(8) << std::setfill('0') << std::endl;
+            }
+            int imem_addr = top->soc_wrapper_top->soc_top_level->imem->imem->get_mem_addr();
+            int imem_rd_data = top->soc_wrapper_top->soc_top_level->imem->imem->get_mem_rd_data();
+            //std::cout << "  imem rd: @" << std::hex << std::setw(8) << std::setfill('0') << imem_addr << " = 0x"<< std::hex << std::setw(8) << std::setfill('0') << imem_rd_data << std::endl;
+            if (CPU->get_instr_code() == 0x00100073) { //ebreak
+                std::cout << "  ebreak" << std::endl;
+                break;
+            }
+        }
     }
+
+    // Close the file stream when done
+    fclose(output_file_stream);
 
     // Fermez le fichier VCD
     tfp->close();
