@@ -49,6 +49,7 @@ IMEM_DEPTH = 10
 DMEM_DEPTH = 10
 
 VCD_FILE = waveform.vcd
+PRINT_FILE = $(LOG_DIR)/print.log
 
 ########################################################
 # Files
@@ -129,7 +130,7 @@ $(VCD_FILE): $(SIM_FILE)
 	@echo "              Simulating              "
 	@echo "######################################"
 	@echo -e "$(_END)"
-	@$(SIM_FILE) --imem_file "$(IMEM_FILE)" --dmem_file "$(DMEM_FILE)" --imem_depth $(IMEM_DEPTH) --dmem_depth $(DMEM_DEPTH) --vcd_file "$(VCD_FILE)" \
+	@$(SIM_FILE) --imem_file "$(IMEM_FILE)" --dmem_file "$(DMEM_FILE)" --imem_depth $(IMEM_DEPTH) --dmem_depth $(DMEM_DEPTH) --vcd_file "$(VCD_FILE)" --print --print_save $(PRINT_FILE) \
 	| sed $(VERILATOR_COLOR)
 #	+verilator+rand+reset+2 
 
