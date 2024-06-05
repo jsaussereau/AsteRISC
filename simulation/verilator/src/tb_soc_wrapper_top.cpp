@@ -250,7 +250,7 @@ int main(int argc, char** argv) {
         }
     }
 
-    std::cout << _BOLD << "Log: " << _END << std::endl;
+    std::cout << _BOLD << "Software Print Log: " << _END << std::endl << "  ";
     uint64_t last_instret = 2;
 
     // Commencez la simulation
@@ -334,7 +334,11 @@ int main(int argc, char** argv) {
                 if (dbus_addr == DEBUG_ADDR) {
                     //std::cout << "  dbus wr: @ 0x" << std::hex << std::setw(8) << std::setfill('0') << dbus_addr << " = 0x"<< std::hex << std::setw(8) << std::setfill('0') << dbus_wr_data << std::endl;
                     if (dbus_wr_en) {
-                        printf("%c", dbus_wr_data);
+                        if (dbus_wr_data == '\n') {
+                            printf("\n  ");
+                        } else {
+                            printf("%c", dbus_wr_data);
+                        }
                         fprintf(print_save_file_stream, "%c", dbus_wr_data);
                     }
                 }
