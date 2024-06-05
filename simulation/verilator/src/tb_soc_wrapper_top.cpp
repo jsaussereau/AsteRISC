@@ -44,6 +44,8 @@
 #define _CYAN "\x1b[36m"
 #define _WHITE "\x1b[37m"
 
+#define DEBUG_ADDR 0x0a000000
+
 #define CPU top->soc_wrapper_top->soc_top_level->nonpipe__DOT__cpu
 
 void help() {
@@ -56,6 +58,8 @@ void help() {
                  "  -D, --dmem_depth\tPower of two representing the depth of the data memory.\n"
                  "  -v, --vcd_file  \tPath to the output VCD file for waveform dumping.\n"
                  "  -l, --log_file  \tPath of the CPU activity log file.\n"
+                 "  -p, --print     \tPrint characters written at debug address.\n"
+                 "  -f, --fprint    \tPath of the file to save characters written at debug address.\n"
                  "  -h, --help      \tPrint this help message and exit.\n"
                  "\n" << _BOLD "Example:\n" << _END
                  "  ./Vsoc_wrapper_top --imem_file=imem.hex --dmem_file=dmem.hex --vcd_file=output.vcd --imem_depth=10 --dmem_depth=12\n\n";
@@ -67,11 +71,15 @@ int main(int argc, char** argv) {
 
     std::string imem_file_path;
     std::string dmem_file_path;
+    std::string debug_print_file_path = "./log/print.log";
     std::string vcd_file_path = "./waveform.vcd";
     std::string cpu_log_file_path = "./log/cpu_activity.log";
 
     int p_imem_depth_pw2;
     int p_dmem_depth_pw2;
+
+    bool debug_print = false;
+    bool debug_print_save = false;
 
     // Définition des options à lire avec getopt_long
     static struct option long_options[] = {
@@ -80,12 +88,14 @@ int main(int argc, char** argv) {
         {"imem_depth", required_argument, 0, 'I'},
         {"dmem_depth", required_argument, 0, 'D'},
         {"vcd_file", required_argument, 0, 'v'},
+        {"print", no_argument, 0, 'p'},
+        {"print_save", required_argument, 0, 's'},
         {"help", no_argument, 0, 'h'},
         {0, 0, 0, 0}
     };
 
     int option_index = 0;
-    while ((opt = getopt_long(argc, argv, "i:d:I:D:v:h", long_options, &option_index)) != -1) {
+    while ((opt = getopt_long(argc, argv, "i:d:I:D:v:s:ph", long_options, &option_index)) != -1) {
         switch (opt) {
             case 'i':
                 imem_file_path = optarg;
@@ -104,6 +114,13 @@ int main(int argc, char** argv) {
                 break;
             case 'l':
                 cpu_log_file_path = optarg;
+                break;
+            case 'p':
+                debug_print = true;
+                break;
+            case 's':
+                debug_print_save = true;
+                debug_print_file_path = optarg;
                 break;
             case 'h':
                 help();
@@ -135,6 +152,11 @@ int main(int argc, char** argv) {
     std::cout << "  dmem_depth = 2^" << p_dmem_depth_pw2 << std::endl;
     std::cout << "  vcd_file_path = " << vcd_file_path << std::endl;
     std::cout << "  cpu_log_file_path = " << cpu_log_file_path << std::endl;
+    std::cout << "  debug_print = " << debug_print << std::endl;
+    std::cout << "  print_save = " << debug_print_save <<  std::endl;
+    if (debug_print_save) {
+        std::cout << "  print_save_file = " << debug_print_file_path << std::endl;
+    }
     std::cout << std::endl;
 
     // Initialise Verilator
@@ -205,22 +227,34 @@ int main(int argc, char** argv) {
     tfp->open(vcd_file_path.c_str());
 
     FILE *output_file_stream;
-
-    // Open the file for writing
     output_file_stream = fopen(cpu_log_file_path.c_str(), "w");
 
     // Check if the file stream is valid
     if (output_file_stream == NULL) {
         // Handle error if file cannot be opened
-        printf("Error: Unable to open file for writing.\n");
+        printf("error: Unable to open file \"%s\" for writing.\n", cpu_log_file_path);
         exit(1); // Exit the program
+    }
+
+    FILE *print_save_file_stream;
+
+    if (debug_print_save) {
+
+        print_save_file_stream = fopen(debug_print_file_path.c_str(), "w");
+
+        // Check if the file stream is valid
+        if (print_save_file_stream == NULL) {
+            // Handle error if file cannot be opened
+            printf("error: Unable to open file \"%s\" for writing.\n", debug_print_file_path);
+            exit(1); // Exit the program
+        }
     }
 
     std::cout << _BOLD << "Log: " << _END << std::endl;
     uint64_t last_instret = 2;
 
     // Commencez la simulation
-    for (int time = 0; time < 20000; ++time) {
+    for (int time = 0; time < 1000000; ++time) {
         // Basculez l'horloge
         top->i_xtal_p = !top->i_xtal_p;
 
@@ -240,7 +274,7 @@ int main(int argc, char** argv) {
 
         bool p_bypass_log = false;
 
-        if (time%4 == 0 && !top->i_xrst) {
+        if (time%2 == 0 && !top->i_xrst) {
 
             //std::cout << "  " << CPU->get_instr_name() << std::endl;;
 
@@ -293,13 +327,21 @@ int main(int argc, char** argv) {
                 }
             }
 
-            int dmem_addr = top->soc_wrapper_top->soc_top_level->dmem->dmem->get_mem_addr();
-            int dmem_wr_data = top->soc_wrapper_top->soc_top_level->dmem->dmem->get_mem_wr_data();
-            if (dmem_addr == (0x0a000000 >> 2) || dmem_addr == 0x0a000000) {
-                std::cout << "  dmem wr: @" << std::hex << std::setw(8) << std::setfill('0') << dmem_addr << " = 0x"<< std::hex << std::setw(8) << std::setfill('0') << std::endl;
+            if (debug_print) {
+                uint32_t dbus_addr = CPU->mem_stage->get_dbus_addr();
+                uint32_t dbus_wr_data = CPU->mem_stage->get_dbus_wr_data();
+                bool dbus_wr_en = CPU->mem_stage->get_dbus_wr_en();
+                if (dbus_addr == DEBUG_ADDR) {
+                    //std::cout << "  dbus wr: @ 0x" << std::hex << std::setw(8) << std::setfill('0') << dbus_addr << " = 0x"<< std::hex << std::setw(8) << std::setfill('0') << dbus_wr_data << std::endl;
+                    if (dbus_wr_en) {
+                        printf("%c", dbus_wr_data);
+                        fprintf(print_save_file_stream, "%c", dbus_wr_data);
+                    }
+                }
             }
-            int imem_addr = top->soc_wrapper_top->soc_top_level->imem->imem->get_mem_addr();
-            int imem_rd_data = top->soc_wrapper_top->soc_top_level->imem->imem->get_mem_rd_data();
+
+            uint32_t imem_addr = top->soc_wrapper_top->soc_top_level->imem->imem->get_mem_addr();
+            uint32_t imem_rd_data = top->soc_wrapper_top->soc_top_level->imem->imem->get_mem_rd_data();
             //std::cout << "  imem rd: @" << std::hex << std::setw(8) << std::setfill('0') << imem_addr << " = 0x"<< std::hex << std::setw(8) << std::setfill('0') << imem_rd_data << std::endl;
             if (CPU->get_instr_code() == 0x00100073) { //ebreak
                 std::cout << "  ebreak" << std::endl;
@@ -308,8 +350,9 @@ int main(int argc, char** argv) {
         }
     }
 
-    // Close the file stream when done
+    // Close the file streams when done
     fclose(output_file_stream);
+    fclose(print_save_file_stream);
 
     // Fermez le fichier VCD
     tfp->close();
