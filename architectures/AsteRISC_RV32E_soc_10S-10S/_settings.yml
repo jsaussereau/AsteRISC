@@ -1,0 +1,35 @@
+
+##############################################
+# Settings for AsteRISC_soc_10S-10S-05R
+##############################################
+---
+
+#rtl path, relative to "architectures" parent directory, not this directory
+rtl_path: "../AsteRISC-core/rtl"
+
+top_level_file: "soc/soc_wrapper_top.sv"
+top_level_module: "soc_wrapper_top"
+rtl_file_format: ".sv"
+
+clock_signal: "i_xtal_p"
+
+# copy a file into synthesis directory?
+file_copy_enable: "true"
+file_copy_source: "config/soc_config.sv"
+file_copy_dest: "rtl/soc_config.sv"
+
+# delimiters for paramater files
+start_delimiter: "soc_wrapper_top #("
+stop_delimiter: ")("
+
+# optionnal target-specific bounds to speed up fmax search
+xc7s25-csga225-1:
+  fmax_lower_bound: 50
+  fmax_upper_bound: 170
+xc7a100t-csg324-1:
+  fmax_lower_bound: 30
+  fmax_upper_bound: 180
+xc7k70t-fbg676-2:
+  fmax_lower_bound: 80
+  fmax_upper_bound: 300
+...
