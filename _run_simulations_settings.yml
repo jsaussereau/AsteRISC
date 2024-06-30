@@ -5,7 +5,7 @@
 ---
 
 # overwrite existing results
-overwrite:        No
+overwrite:        Yes
 
 # prompt 'continue? (y/n)' after settings checks
 ask_continue:     Yes
