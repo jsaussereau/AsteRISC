@@ -69,6 +69,11 @@ h4 {
 
 .sidebar-brand-text {
     text-align: center;
+} 
+
+.fig {
+    background-color: #f2f2f2a6 !important;
+    border-radius: 1rem;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -105,15 +110,14 @@ h4 {
         border-radius: 0.35rem;
         background-color: #343942 !important;
     }
+
+    body:not([data-theme="light"]) .fig {
+        background-color: #707680 !important;
+    }
     
     body:not([data-theme="light"]) {
         --color-background-primary: #0d1117;
         --color-background-secondary: #010409;
         --color-highlight-on-target: #343942;
     }
-
-    body:not([data-theme="light"]) .sidebar-logo {
-        /*filter: drop-shadow(0 0 4mm #293172b5);*/
-      }
-
 }

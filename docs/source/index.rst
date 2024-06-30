@@ -4,8 +4,8 @@
 .. |AsteRISC| image:: https://img.shields.io/badge/GitHub-AsteRISC-blue.svg?logo=github
   :target:  https://github.com/jsaussereau/AsteRISC
 
-.. |AsteRISCcore| image:: https://img.shields.io/badge/GitHub-AsteRISC--core-blue.svg?logo=github
-  :target:  https://github.com/jsaussereau/AsteRISC-core
+.. |AsteRISCrtl| image:: https://img.shields.io/badge/GitHub-AsteRISC--rtl-blue.svg?logo=github
+  :target:  https://github.com/jsaussereau/AsteRISC-rtl
 
 .. |License| image:: https://img.shields.io/github/license/jsaussereau/AsteRISC
   :target:  https://github.com/jsaussereau/AsteRISC/blob/main/LICENSE
@@ -16,7 +16,10 @@
 .. |GitHub| image:: https://img.shields.io/badge/GitHub-Asterism-blue.svg?logo=github
   :target:  https://github.com/jsaussereau/Asterism
 
-|AsteRISC| |AsteRISCcore| |License| |Docs|
+.. centered:: |AsteRISC| |AsteRISCrtl| |License| |Docs|
+
+Overview
+---------
 
 .. |logo| image:: images/asterisc_logo.png
   :width: 30
@@ -44,3 +47,7 @@ Contents
   userguide/installation
   userguide/quick_start
 
+.. toctree::
+  :caption: Documentation
+
+  documentation/principle
