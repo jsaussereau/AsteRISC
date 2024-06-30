@@ -5,7 +5,7 @@
 ---
 
 #rtl path, relative to "architectures" parent directory, not this directory
-rtl_path: "../AsteRISC-core/rtl"
+rtl_path: "../AsteRISC-rtl/rtl"
 
 top_level_file: "soc/soc_wrapper_top.sv"
 top_level_module: "soc_wrapper_top"
