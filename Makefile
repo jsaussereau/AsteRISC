@@ -105,7 +105,7 @@ vivado: motd run_vivado clean_vivado results_vivado
 
 .PHONY: run_vivado
 run_vivado: 
-	@make -C $(ASTERISM_DIR) $@_only CURRENT_DIR=$(ASTERISC_DIR) OPTIONS="-i $(ASTERISC_DIR)/$(SYNTH_SETTINGS_FILE) --archpath $(ASTERISC_DIR)/$(ARCHITECTURE_DIR) --work $(ASTERISC_DIR)/$(WORK_DIR)" --no-print-directory
+	@make -C $(ASTERISM_DIR) $@_only CURRENT_DIR=$(ASTERISC_DIR) OPTIONS="-i $(ASTERISC_DIR)/$(SYNTH_SETTINGS_FILE) --archpath $(ASTERISC_DIR)/$(ARCHITECTURES_DIR) --work $(ASTERISC_DIR)/$(WORK_DIR)" --no-print-directory
 
 .PHONY: results_vivado
 results_vivado:
