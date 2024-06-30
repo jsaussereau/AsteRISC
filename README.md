@@ -1,9 +1,9 @@
 # AsteRISC
 
 [![GitHub](https://img.shields.io/badge/GitHub-AsteRISC-blue.svg?logo=github)](https://github.com/jsaussereau/AsteRISC)
-[![GitHub](https://img.shields.io/badge/GitHub-AsteRISC--core-blue.svg?logo=github)](https://github.com/jsaussereau/AsteRISC-core)
-[![GitHub License](https://img.shields.io/github/license/jsaussereau/AsteRISC)](https://github.com/jsaussereau/AsteRISC/blob/main/LICENSE)
-[![Documentation Status](https://readthedocs.org/projects/asterisc/badge/?version=latest)](https://asterism.readthedocs.io)
+[![GitHub](https://img.shields.io/badge/GitHub-AsteRISC--rtl-blue.svg?logo=github)](https://github.com/jsaussereau/AsteRISC-rtl)
+[![GitHub License](https://img.shields.io/github/license/jsaussereau/AsteRISC-rtl)](https://github.com/jsaussereau/AsteRISC-rtl/blob/main/LICENSE)
+[![Documentation Status](https://readthedocs.org/projects/asterisc/badge/?version=latest)](https://asterisc.readthedocs.io)
 
 ## Overview
 
