@@ -1,0 +1,10 @@
+// imem/dmem depth (power of two)
+  parameter p_imem_depth_pw2  = 11,           //! depth of the instruction memory in power of two (number of 32-bit words)
+  parameter p_dmem_depth_pw2  = 11,           //! depth of the data memory in power of two (number of 32-bit words)
+
+  // imem/dmem init files (simulations)
+  parameter p_imem_init       = "firmware/imem.hex",
+  parameter p_dmem_init       = "firmware/dmem.hex",
+
+  parameter p_counters        = 1,            //! use counters (mcycle, minstret, mtime)
+  parameter p_ext_rvzicsr     = 1,            //! use RV32Zicsr extension (control and status registers)

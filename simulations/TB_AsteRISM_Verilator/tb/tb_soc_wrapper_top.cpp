@@ -27,11 +27,13 @@
 #include <iomanip>
 #include <fstream>
 #include <sstream>
+#include <algorithm>
+#include <iterator>
 #include <string>
 #include <cstdio> 
 #include <getopt.h>
 
-#define PERIOD 10 // Mettez la période en nanosecondes ici
+#define PERIOD 10 // nanoseconds
 
 #define _BOLD "\x1b[1m"
 #define _END "\x1b[0m"
@@ -65,6 +67,13 @@ void help() {
                  "  ./Vsoc_wrapper_top --imem_file=imem.hex --dmem_file=dmem.hex --vcd_file=output.vcd --imem_depth=10 --dmem_depth=12\n\n";
 }
 
+int count_lines(const std::string& filename) {
+    std::ifstream file(filename);
+    return std::count(std::istreambuf_iterator<char>(file),
+                      std::istreambuf_iterator<char>(),
+                      '\n');
+}
+
 int main(int argc, char** argv) {
 
     int opt;
@@ -81,7 +90,6 @@ int main(int argc, char** argv) {
     bool debug_print = false;
     bool debug_print_save = false;
 
-    // Définition des options à lire avec getopt_long
     static struct option long_options[] = {
         {"imem_file", required_argument, 0, 'i'},
         {"dmem_file", required_argument, 0, 'd'},
@@ -131,7 +139,7 @@ int main(int argc, char** argv) {
         }
     }
 
-    // Vérifiez le nombre d'arguments
+    // Check options
     if (imem_file_path.empty() || dmem_file_path.empty()) {
         std::cout << _BOLD << _RED << "error: missing required arguments: ";
         if (imem_file_path.empty()) {
@@ -148,8 +156,8 @@ int main(int argc, char** argv) {
     std::cout << std::endl << _BOLD << "Options: " << _END << std::endl;
     std::cout << "  imem_file = " << imem_file_path << std::endl;
     std::cout << "  dmem_file = " << dmem_file_path << std::endl;
-    std::cout << "  imem_depth = 2^" << p_imem_depth_pw2 << std::endl;
-    std::cout << "  dmem_depth = 2^" << p_dmem_depth_pw2 << std::endl;
+    //std::cout << "  imem_depth = 2^" << p_imem_depth_pw2 << std::endl;
+    //std::cout << "  dmem_depth = 2^" << p_dmem_depth_pw2 << std::endl;
     std::cout << "  vcd_file_path = " << vcd_file_path << std::endl;
     std::cout << "  cpu_log_file_path = " << cpu_log_file_path << std::endl;
     std::cout << "  debug_print = " << debug_print << std::endl;
@@ -162,29 +170,51 @@ int main(int argc, char** argv) {
     // Initialise Verilator
     Verilated::commandArgs(argc, argv);
 
-    // Créez une instance du modèle Verilated
+    // Get a verilated instance
     Vsoc_wrapper_top* top = new Vsoc_wrapper_top;
 
-    // Initialisez l'horloge et la réinitialisation
+    // Init clock and reset
     top->i_xtal_p = 0;
     top->i_xtal_n = 0;
     top->i_xclk = 0;
     top->i_xrst = 1;
 
-    // Ouvrez et initialisez les fichiers imem et dmem
+    // Init imem an dmem
     std::ifstream imem_file(imem_file_path, std::ios::in);
     if (!imem_file.is_open()) {
         std::cout << _BOLD << _RED << "error: could not open imem init file \"" << imem_file_path << "\" " << _END << std::endl;
         return 1;
     }
+
     std::ifstream dmem_file(dmem_file_path, std::ios::in);
     if (!dmem_file.is_open()) {
         std::cout << _BOLD << _RED << "error: could not open dmem init file \"" << imem_file_path << "\" " << _END << std::endl;
         return 1;
     }
 
-    // Chargez imem et dmem
-    for (uint32_t i = 0 ; i < (1 << top->soc_wrapper_top->p_imem_depth_pw2) ; ++i) {
+    int imem_lines = count_lines(imem_file_path);
+    int dmem_lines = count_lines(dmem_file_path);
+
+    int imem_depth = (1 << top->soc_wrapper_top->p_imem_depth_pw2);
+    int dmem_depth = (1 << top->soc_wrapper_top->p_dmem_depth_pw2);
+
+    std::cout << _BOLD << "Sanity check: " << _END << std::endl;
+    std::cout << "  imem init file size = " << ((imem_lines > imem_depth) ? _RED : _END) << imem_lines << _END << "/" << imem_depth << std::endl;
+    std::cout << "  dmem init file size = " << ((dmem_lines > dmem_depth) ? _RED : _END) << dmem_lines << _END << "/" << dmem_depth << std::endl;
+    std::cout << std::endl;
+
+    if (imem_lines > imem_depth) {
+        std::cout << _BOLD << _RED << "error:" << _END << " " << _RED << "imem init file is too large for the current instruction memory depth" << _END << std::endl;
+        return 1;
+    }
+
+    if (dmem_lines > dmem_depth) {
+        std::cout << _BOLD << _RED << "error:" << _END << " " << _RED << "dmem init file is too large for the current data memory depth" << _END << std::endl;
+        return 1;
+    }
+
+    // Load imem and dmem
+    for (uint32_t i = 0 ; i < imem_depth ; ++i) {
         std::string line;
         if (std::getline(imem_file, line)) {
             std::istringstream iss(line);
@@ -201,7 +231,7 @@ int main(int argc, char** argv) {
         }
     }
 
-    for (uint32_t i = 0 ; i < (1 << top->soc_wrapper_top->p_dmem_depth_pw2) ; ++i) {
+    for (uint32_t i = 0 ; i < dmem_depth ; ++i) {
         std::string line;
         if (std::getline(dmem_file, line)) {
             std::istringstream iss(line);
@@ -216,7 +246,7 @@ int main(int argc, char** argv) {
         }
     }
 
-    // Fermez les fichiers de mémoire
+    // Close mem files
     /*imem_file.close();
     dmem_file.close();*/
 
@@ -233,7 +263,7 @@ int main(int argc, char** argv) {
     if (output_file_stream == NULL) {
         // Handle error if file cannot be opened
         printf("error: Unable to open file \"%s\" for writing.\n", cpu_log_file_path);
-        exit(1); // Exit the program
+        exit(1);
     }
 
     FILE *print_save_file_stream;
@@ -246,28 +276,21 @@ int main(int argc, char** argv) {
         if (print_save_file_stream == NULL) {
             // Handle error if file cannot be opened
             printf("error: Unable to open file \"%s\" for writing.\n", debug_print_file_path);
-            exit(1); // Exit the program
+            exit(1);
         }
     }
 
     std::cout << _BOLD << "Software Print Log: " << _END << std::endl << "  ";
     uint64_t last_instret = 2;
 
-    // Commencez la simulation
     for (int time = 0; time < 1000000; ++time) {
-        // Basculez l'horloge
         top->i_xtal_p = !top->i_xtal_p;
 
-        // Évaluez le modèle Verilated
         top->eval();
-
-        // Enregistrez l'état des signaux dans le fichier VCD
         tfp->dump(time);
-
-        // Avancez dans le temps d'une demi-période
         Verilated::timeInc(PERIOD / 2);
 
-        // Réinitialisez à un moment donné si nécessaire
+        // reset 
         if (time == 6) {
             top->i_xrst = 0;
         }
@@ -276,9 +299,7 @@ int main(int argc, char** argv) {
 
         if (time%2 == 0 && !top->i_xrst) {
 
-            //std::cout << "  " << CPU->get_instr_name() << std::endl;;
-
-            // Modify your printf statements to use fprintf
+            // print execution log
             if (CPU->get_instret() != 0 && CPU->get_instret() != last_instret) {
                 last_instret = CPU->get_instret();
                 fprintf(output_file_stream, "%0d) pc 0x%08x:\n ", CPU->get_instret(), CPU->get_pc());
@@ -321,9 +342,6 @@ int main(int argc, char** argv) {
                 }
                 if (CPU->get_wb_en()) {
                     fprintf(output_file_stream, "  rd  (x%02d) = 0x%08x\n", CPU->get_wb_addr(), CPU->get_wb_data());  
-                } else {
-                    //fprintf(output_file_stream, "  <<<rd  (x%02d) = 0x%08x\n", CPU->get_wb_addr(), CPU->get_wb_data());  
-                    //fprintf(output_file_stream, "\n");
                 }
             }
 
@@ -354,14 +372,14 @@ int main(int argc, char** argv) {
         }
     }
 
-    // Close the file streams when done
+    // Close file streams
     fclose(output_file_stream);
     fclose(print_save_file_stream);
 
-    // Fermez le fichier VCD
+    // Close VCD file
     tfp->close();
 
-    // Nettoyez
+    // Clean
     delete top;
     delete tfp;
 
