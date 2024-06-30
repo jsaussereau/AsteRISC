@@ -1,7 +1,7 @@
 
-###########################################
-# Settings for AsteRISC_RV32E_soc_10S-10S #
-###########################################
+################################################
+# Settings for AsteRISC_RV32IM_m1c_soc_10S-10S #
+################################################
 ---
 
 #rtl path, relative to "architectures" parent directory (Asterism root), not this directory
