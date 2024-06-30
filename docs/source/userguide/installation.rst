@@ -18,6 +18,7 @@ Step 1: Clone the repository
          sudo apt install -y git
          git clone https://github.com/jsaussereau/AsteRISC.git
          cd AsteRISC/
+         git submodule update --init --recursive
 
    .. group-tab:: Fedora/CentOS/AlmaLinux
 
@@ -27,6 +28,7 @@ Step 1: Clone the repository
          sudo dnf install -y git
          git clone https://github.com/jsaussereau/AsteRISC.git
          cd AsteRISC/
+         git submodule update --init --recursive
 
    .. group-tab:: Arch Linux
 
@@ -36,6 +38,7 @@ Step 1: Clone the repository
          sudo pacman -S git --noconfirm
          git clone https://github.com/jsaussereau/AsteRISC.git
          cd AsteRISC/
+         git submodule update --init --recursive
 
 
 Install Asterism
