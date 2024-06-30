@@ -1,6 +1,6 @@
-[submodule "AsteRISC-core"]
-	path = AsteRISC-core
-	url = https://github.com/jsaussereau/AsteRISC-core.git
+[submodule "AsteRISC-rtl"]
+	path = AsteRISC-rtl
+	url = https://github.com/jsaussereau/AsteRISC-rtl.git
 [submodule "Asterism"]
 	path = Asterism
 	url = https://github.com/jsaussereau/Asterism.git
