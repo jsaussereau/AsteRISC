@@ -10,13 +10,16 @@
 .. |License| image:: https://img.shields.io/github/license/jsaussereau/AsteRISC
   :target:  https://github.com/jsaussereau/AsteRISC/blob/main/LICENSE
 
+.. |Cite| image:: https://img.shields.io/badge/cite-DOI%3A10.1109%2FISCAS46773.2023.10181330-green
+  :target: https://doi.org/10.1109/ISCAS46773.2023.10181330
+
 .. |Docs| image:: https://readthedocs.org/projects/asterisc/badge/?version=latest
   :target:  https://asterisc.readthedocs.io
 
 .. |GitHub| image:: https://img.shields.io/badge/GitHub-Asterism-blue.svg?logo=github
   :target:  https://github.com/jsaussereau/Asterism
 
-.. centered:: |AsteRISC| |AsteRISCrtl| |License| |Docs|
+.. centered:: |AsteRISC| |AsteRISCrtl| |License| |Cite| |Docs|
 
 Overview
 ---------
