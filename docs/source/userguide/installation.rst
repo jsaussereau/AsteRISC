@@ -41,6 +41,23 @@ Step 1: Clone the repository
          git submodule update --init --recursive
 
 
+Install EDA tools
+=================
+
+To run command from the :doc:`/userguide/quick_start` section to work, you need the following tools:
+
+- Verilator 5+
+
+.. warning::
+   Depending on your system, to have Verilator 5+, you may have to build it `from source <https://verilator.org/guide/latest/install.html#git-quick-install>`_.
+   Concerned distributions include: Ubuntu 22.04 and older, Debian 11 and older, Fedora 38 and older.
+
+- Vivado
+
+.. note::
+   Vivado ML standard edition is a free Vivado version with no license requirements.
+
+
 Install Asterism
 ================
 
