@@ -54,3 +54,4 @@ Contents
   :caption: Documentation
 
   documentation/principle
+  documentation/stages

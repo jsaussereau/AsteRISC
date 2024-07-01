@@ -44,5 +44,7 @@ html_css_files = [
     'css/custom.css',
 ]
 
+numfig = True
+
 # -- Options for EPUB output
 epub_show_urls = 'footnote'
