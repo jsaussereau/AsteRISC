@@ -2,12 +2,39 @@
 # Python
 **/__pycache__
 
-# Work
-work/*
+# Simulation
+work/simulations/*
+
+# Vivado
+work/vivado*
+work/vivado/*
+**/.Xil
+**/vivado*.jou
+**/vivado*.log
+**/vivado*.str
+**/tight_setup_hold_pins.txt
+hs_err_*.log
+.run_vivado_success
+
+# Design Compiler
+work/design_compiler/*
+work/ARCH
+work/ENTI
+work/*.syn
+work/*.mr
+.nfs*
+alib-*
+command.log
+change_names_verilog
+default.svf
+filenames*.log
+LIB_*_autoread
+
+# Results
+results/*
 
 # Others
 **/.stamp.*
-.run_vivado_success
 
 # Docs
-docs/build/*
+docs/build
