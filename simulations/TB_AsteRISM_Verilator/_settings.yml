@@ -5,13 +5,13 @@
 ---
 
 # delimiters for parameter files
-use_parameters: "true"
+use_parameters: Yes
 param_target_file: "rtl/soc/soc_wrapper_top.sv"
 start_delimiter: "soc_wrapper_top #("
 stop_delimiter: ")("
 
 # override part of the parameters
-override_parameters: "true"
+override_parameters: Yes
 override_param_target_file: "rtl/soc/soc_wrapper_top.sv"
 override_param_file: "benchmark_params.txt"
 override_start_delimiter: "  // -----------------------------------------------"
