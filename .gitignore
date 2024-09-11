@@ -17,11 +17,7 @@ hs_err_*.log
 .run_vivado_success
 
 # Design Compiler
-work/design_compiler/*
-work/ARCH
-work/ENTI
-work/*.syn
-work/*.mr
+work/*
 .nfs*
 alib-*
 command.log
@@ -35,6 +31,10 @@ results/*
 
 # Others
 **/.stamp.*
+
+# Virtual environment
+venv
+odatix_venv
 
 # Docs
 docs/build
