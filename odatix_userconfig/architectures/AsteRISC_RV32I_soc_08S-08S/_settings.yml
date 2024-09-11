@@ -1,0 +1,43 @@
+
+###########################################
+# Settings for AsteRISC_RV32I_soc_10S-10S #
+###########################################
+---
+
+#rtl path
+rtl_path: "AsteRISC-rtl/rtl"
+
+top_level_file: "soc/soc_wrapper_top.sv"
+top_level_module: "soc_wrapper_top"
+rtl_file_format: ".sv"
+
+clock_signal: "i_xtal_p"
+reset_signal: "i_rst"
+
+# copy a file into synthesis directory?
+file_copy_enable: Yes
+file_copy_source: "config/soc_config_fpga.sv"
+file_copy_dest: "rtl/soc_config.sv"
+
+# delimiters for parameter files
+use_parameters: Yes
+start_delimiter: "soc_wrapper_top #("
+stop_delimiter: ")("
+
+# optionnal target-specific bounds to speed up fmax search
+xc7s25-csga225-1:
+  fmax_lower_bound: 50
+  fmax_upper_bound: 170
+xc7a100t-csg324-1:
+  fmax_lower_bound: 50
+  fmax_upper_bound: 300
+xc7k70t-fbg676-2:
+  fmax_lower_bound: 80
+  fmax_upper_bound: 300
+ST28CMOSFDSOI:
+  fmax_lower_bound: 500
+  fmax_upper_bound: 2000
+  file_copy_enable: Yes
+  file_copy_source: "config/soc_config_asic_st28.sv"
+  file_copy_dest: "rtl/soc_config.sv"
+...

@@ -30,8 +30,8 @@ DHRYSTONE_WORK          = work/simulations/Dhrystone
 # Files
 ########################################################
 
-ASTERISM_COMMAND        = python3 $(ASTERISM_DIR)/scripts/asterism.py
-ASTERISM_EXPLORE_COMMAND= python3 $(ASTERISM_DIR)/scripts/asterism-explore.py
+ODATIX_COMMAND          = odatix
+ODATIX_EXPLORE_COMMAND  = odatix-explorer
 DHRYSTONE_SETTINGS      = simulations/_run_dhrystone_settings.yml
 
 ########################################################
@@ -88,7 +88,7 @@ motd:
 
 .PHONY: clean
 clean: 
-	@$(ASTERISM_COMMAND) clean --nobanner
+	@$(ODATIX_COMMAND) clean --nobanner
 
 ########################################################
 # Simulation
@@ -96,18 +96,18 @@ clean:
 
 .PHONY: sim
 sim: motd
-	@$(ASTERISM_COMMAND) sim --nobanner
+	@$(ODATIX_COMMAND) sim --nobanner
 
 .PHONY: benchmarks
 benchmarks: motd benchmarks_only results_benchmarks
 
 .PHONY: benchmarks_only
 benchmarks_only:
-	@$(ASTERISM_COMMAND) sim -i $(DHRYSTONE_SETTINGS) --nobanner
+	@$(ODATIX_COMMAND) sim -i $(DHRYSTONE_SETTINGS) --nobanner
 
 .PHONY: results_benchmarks
 results_benchmarks:
-	@$(ASTERISM_COMMAND) res_benchmark --work $(DHRYSTONE_WORK) --nobanner
+	@$(ODATIX_COMMAND) res_benchmark --work $(DHRYSTONE_WORK) --nobanner
 
 ########################################################
 # Vivado
@@ -118,15 +118,15 @@ vivado: motd run_vivado clean_vivado
 
 .PHONY: run_vivado
 run_vivado: 
-	@$(ASTERISM_COMMAND) synth --tool vivado --nobanner
+	@$(ODATIX_COMMAND) fmax --tool vivado --nobanner
 
 .PHONY: results_vivado
 results_vivado:
-	@$(ASTERISM_COMMAND) res_synth --tool vivado --nobanner
+	@$(ODATIX_COMMAND) res_synth --tool vivado --nobanner
 
 .PHONY: clean_vivado
 clean_vivado:
-	@$(ASTERISM_COMMAND) clean --quiet --nobanner
+	@$(ODATIX_COMMAND) clean --quiet --nobanner
 
 ########################################################
 # Design Compiler
@@ -134,15 +134,15 @@ clean_vivado:
 
 .PHONY: dc
 dc: motd 
-	@$(ASTERISM_COMMAND) synth --tool design_compiler --nobanner
+	@$(ODATIX_COMMAND) fmax --tool design_compiler --nobanner
 
 .PHONY: results_dc
 results_dc:
-	@$(ASTERISM_COMMAND) res_synth --tool design_compiler --nobanner
+	@$(ODATIX_COMMAND) res_synth --tool design_compiler --nobanner
 
 .PHONY: clean_dc
 clean_dc:
-	@$(ASTERISM_COMMAND) clean --quiet --nobanner
+	@$(ODATIX_COMMAND) clean --quiet --nobanner
 
 ########################################################
 # Generic
@@ -158,4 +158,4 @@ results: results_benchmarks results_vivado
 
 .PHONY: explore
 explore:
-	@$(ASTERISM_EXPLORE_COMMAND)
+	@$(ODATIX_EXPLORE_COMMAND)

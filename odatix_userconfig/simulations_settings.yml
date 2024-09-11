@@ -1,0 +1,75 @@
+
+##############################################
+# Odatix settings for simulations
+##############################################
+---
+
+# overwrite existing results
+overwrite:        No
+
+# prompt 'Continue? (Y/n)' after settings checks
+ask_continue:     Yes
+
+# show simulation log if there is only one architecture selected
+show_log_if_one:  Yes
+
+# maximum number of parallel simulations
+nb_jobs:          12
+
+# targeted simulations
+simulations: 
+
+#--------------------------------------------#
+# AsteRISC
+#--------------------------------------------#
+
+  - dhrystone:
+    - AsteRISC_RV32I_soc_10S-10S/M0000
+    - AsteRISC_RV32I_soc_10S-10S/M0001
+    - AsteRISC_RV32I_soc_10S-10S/M0008
+    - AsteRISC_RV32I_soc_10S-10S/M0016
+    - AsteRISC_RV32I_soc_10S-10S/M0024
+    - AsteRISC_RV32I_soc_10S-10S/M0025
+    - AsteRISC_RV32I_soc_10S-10S/M0036
+    - AsteRISC_RV32I_soc_10S-10S/M0037
+    - AsteRISC_RV32I_soc_10S-10S/M0039
+    - AsteRISC_RV32I_soc_10S-10S/M0044
+    - AsteRISC_RV32I_soc_10S-10S/M0052
+    - AsteRISC_RV32I_soc_10S-10S/M0060
+    - AsteRISC_RV32I_soc_10S-10S/M0061
+    - AsteRISC_RV32I_soc_10S-10S/M0100
+    - AsteRISC_RV32I_soc_10S-10S/M0108
+
+    # - AsteRISC_RV32IM_m1c_soc_10S-10S/M0000
+    # - AsteRISC_RV32IM_m1c_soc_10S-10S/M0001
+    # - AsteRISC_RV32IM_m1c_soc_10S-10S/M0008
+    # - AsteRISC_RV32IM_m1c_soc_10S-10S/M0016
+    # - AsteRISC_RV32IM_m1c_soc_10S-10S/M0024
+    # - AsteRISC_RV32IM_m1c_soc_10S-10S/M0025
+    # - AsteRISC_RV32IM_m1c_soc_10S-10S/M0036
+    # - AsteRISC_RV32IM_m1c_soc_10S-10S/M0037
+    # - AsteRISC_RV32IM_m1c_soc_10S-10S/M0039
+    # - AsteRISC_RV32IM_m1c_soc_10S-10S/M0044
+    # - AsteRISC_RV32IM_m1c_soc_10S-10S/M0052
+    # - AsteRISC_RV32IM_m1c_soc_10S-10S/M0060
+    # - AsteRISC_RV32IM_m1c_soc_10S-10S/M0061
+    # - AsteRISC_RV32IM_m1c_soc_10S-10S/M0100
+    # - AsteRISC_RV32IM_m1c_soc_10S-10S/M0108
+
+    # - AsteRISC_RV32IM_mfast_soc_10S-10S/M0000
+    # - AsteRISC_RV32IM_mfast_soc_10S-10S/M0001
+    # - AsteRISC_RV32IM_mfast_soc_10S-10S/M0008
+    # - AsteRISC_RV32IM_mfast_soc_10S-10S/M0016
+    # - AsteRISC_RV32IM_mfast_soc_10S-10S/M0024
+    # - AsteRISC_RV32IM_mfast_soc_10S-10S/M0025
+    # - AsteRISC_RV32IM_mfast_soc_10S-10S/M0036
+    # - AsteRISC_RV32IM_mfast_soc_10S-10S/M0037
+    # - AsteRISC_RV32IM_mfast_soc_10S-10S/M0039
+    # - AsteRISC_RV32IM_mfast_soc_10S-10S/M0044
+    # - AsteRISC_RV32IM_mfast_soc_10S-10S/M0052
+    # - AsteRISC_RV32IM_mfast_soc_10S-10S/M0060
+    # - AsteRISC_RV32IM_mfast_soc_10S-10S/M0061
+    # - AsteRISC_RV32IM_mfast_soc_10S-10S/M0100
+    # - AsteRISC_RV32IM_mfast_soc_10S-10S/M0108
+
+...

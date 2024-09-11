@@ -1,6 +1,3 @@
 [submodule "AsteRISC-rtl"]
 	path = AsteRISC-rtl
 	url = https://github.com/jsaussereau/AsteRISC-rtl.git
-[submodule "Asterism"]
-	path = Asterism
-	url = https://github.com/jsaussereau/Asterism.git

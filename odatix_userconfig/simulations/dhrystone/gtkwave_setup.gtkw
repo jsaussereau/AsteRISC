@@ -1,0 +1,511 @@
+[*]
+[*] GTKWave Analyzer v3.3.118 (w)1999-2023 BSI
+[*] Tue May 21 14:03:13 2024
+[*]
+[dumpfile] "/home/jsaussereau/Documents/bdxrcg/AsteRISC/simulation/verilator/waveform.vcd"
+[dumpfile_mtime] "Tue May 21 14:01:49 2024"
+[dumpfile_size] 9740181
+[savefile] "/home/jsaussereau/Documents/bdxrcg/AsteRISC/simulation/verilator/gtkwave_setup.gtkw"
+[timestart] 0
+[size] 1569 674
+[pos] -1 -1
+*-6.900001 200 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] TOP.
+[treeopen] TOP.soc_wrapper_top.
+[treeopen] TOP.soc_wrapper_top.soc_top_level.
+[treeopen] TOP.soc_wrapper_top.soc_top_level.dmem.
+[treeopen] TOP.soc_wrapper_top.soc_top_level.imem.
+[treeopen] TOP.soc_wrapper_top.soc_top_level.nonpipe.
+[treeopen] TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.regfile.genblk1.genblk1.regfile.
+[sst_width] 266
+[signals_width] 294
+[sst_expanded] 1
+[sst_vpaned_height] 267
+@800200
+-Clock + Reset
+@28
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.i_clk
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.i_rst
+@1000200
+-Clock + Reset
+@800200
+-CPU
+-Overview
+@22
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.pc[31:0]
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.instr[31:0]
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.instr_name[31:0]
+@c00024
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.minstret[63:0]
+@28
+(0)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.minstret[63:0]
+(1)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.minstret[63:0]
+(2)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.minstret[63:0]
+(3)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.minstret[63:0]
+(4)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.minstret[63:0]
+(5)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.minstret[63:0]
+(6)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.minstret[63:0]
+(7)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.minstret[63:0]
+(8)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.minstret[63:0]
+(9)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.minstret[63:0]
+(10)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.minstret[63:0]
+(11)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.minstret[63:0]
+(12)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.minstret[63:0]
+(13)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.minstret[63:0]
+(14)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.minstret[63:0]
+(15)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.minstret[63:0]
+(16)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.minstret[63:0]
+(17)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.minstret[63:0]
+(18)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.minstret[63:0]
+(19)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.minstret[63:0]
+(20)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.minstret[63:0]
+(21)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.minstret[63:0]
+(22)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.minstret[63:0]
+(23)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.minstret[63:0]
+(24)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.minstret[63:0]
+(25)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.minstret[63:0]
+(26)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.minstret[63:0]
+(27)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.minstret[63:0]
+(28)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.minstret[63:0]
+(29)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.minstret[63:0]
+(30)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.minstret[63:0]
+(31)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.minstret[63:0]
+(32)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.minstret[63:0]
+(33)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.minstret[63:0]
+(34)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.minstret[63:0]
+(35)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.minstret[63:0]
+(36)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.minstret[63:0]
+(37)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.minstret[63:0]
+(38)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.minstret[63:0]
+(39)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.minstret[63:0]
+(40)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.minstret[63:0]
+(41)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.minstret[63:0]
+(42)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.minstret[63:0]
+(43)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.minstret[63:0]
+(44)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.minstret[63:0]
+(45)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.minstret[63:0]
+(46)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.minstret[63:0]
+(47)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.minstret[63:0]
+(48)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.minstret[63:0]
+(49)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.minstret[63:0]
+(50)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.minstret[63:0]
+(51)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.minstret[63:0]
+(52)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.minstret[63:0]
+(53)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.minstret[63:0]
+(54)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.minstret[63:0]
+(55)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.minstret[63:0]
+(56)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.minstret[63:0]
+(57)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.minstret[63:0]
+(58)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.minstret[63:0]
+(59)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.minstret[63:0]
+(60)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.minstret[63:0]
+(61)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.minstret[63:0]
+(62)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.minstret[63:0]
+(63)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.minstret[63:0]
+@1401200
+-group_end
+@24
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fsm.curr_state[3:0]
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fsm.next_state[3:0]
+@1000200
+-Overview
+@800201
+-RISC-V Tests
+@c00821
++{x10/a0  } TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.regfile.genblk1.genblk1.regfile.regs[10][31:0]
+@28
+(0)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.regfile.genblk1.genblk1.regfile.regs[10][31:0]
+(1)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.regfile.genblk1.genblk1.regfile.regs[10][31:0]
+(2)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.regfile.genblk1.genblk1.regfile.regs[10][31:0]
+(3)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.regfile.genblk1.genblk1.regfile.regs[10][31:0]
+(4)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.regfile.genblk1.genblk1.regfile.regs[10][31:0]
+(5)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.regfile.genblk1.genblk1.regfile.regs[10][31:0]
+(6)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.regfile.genblk1.genblk1.regfile.regs[10][31:0]
+(7)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.regfile.genblk1.genblk1.regfile.regs[10][31:0]
+(8)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.regfile.genblk1.genblk1.regfile.regs[10][31:0]
+(9)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.regfile.genblk1.genblk1.regfile.regs[10][31:0]
+(10)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.regfile.genblk1.genblk1.regfile.regs[10][31:0]
+(11)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.regfile.genblk1.genblk1.regfile.regs[10][31:0]
+(12)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.regfile.genblk1.genblk1.regfile.regs[10][31:0]
+(13)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.regfile.genblk1.genblk1.regfile.regs[10][31:0]
+(14)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.regfile.genblk1.genblk1.regfile.regs[10][31:0]
+(15)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.regfile.genblk1.genblk1.regfile.regs[10][31:0]
+(16)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.regfile.genblk1.genblk1.regfile.regs[10][31:0]
+(17)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.regfile.genblk1.genblk1.regfile.regs[10][31:0]
+(18)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.regfile.genblk1.genblk1.regfile.regs[10][31:0]
+(19)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.regfile.genblk1.genblk1.regfile.regs[10][31:0]
+(20)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.regfile.genblk1.genblk1.regfile.regs[10][31:0]
+(21)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.regfile.genblk1.genblk1.regfile.regs[10][31:0]
+(22)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.regfile.genblk1.genblk1.regfile.regs[10][31:0]
+(23)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.regfile.genblk1.genblk1.regfile.regs[10][31:0]
+(24)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.regfile.genblk1.genblk1.regfile.regs[10][31:0]
+(25)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.regfile.genblk1.genblk1.regfile.regs[10][31:0]
+(26)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.regfile.genblk1.genblk1.regfile.regs[10][31:0]
+(27)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.regfile.genblk1.genblk1.regfile.regs[10][31:0]
+(28)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.regfile.genblk1.genblk1.regfile.regs[10][31:0]
+(29)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.regfile.genblk1.genblk1.regfile.regs[10][31:0]
+(30)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.regfile.genblk1.genblk1.regfile.regs[10][31:0]
+(31)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.regfile.genblk1.genblk1.regfile.regs[10][31:0]
+@1401201
+-group_end
+@821
++{x11/a1  } TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.regfile.genblk1.genblk1.regfile.regs[11][31:0]
++{x12/a2  } TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.regfile.genblk1.genblk1.regfile.regs[12][31:0]
++{x13/a3  } TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.regfile.genblk1.genblk1.regfile.regs[13][31:0]
++{x14/a4  } TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.regfile.genblk1.genblk1.regfile.regs[14][31:0]
+@1000201
+-RISC-V Tests
+@c00200
+-GPR
+@22
++{x0/zero } TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.regfile.genblk1.genblk1.regfile.regs[0][31:0]
++{x1/ra   } TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.regfile.genblk1.genblk1.regfile.regs[1][31:0]
++{x2/sp   } TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.regfile.genblk1.genblk1.regfile.regs[2][31:0]
++{x3/gp   } TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.regfile.genblk1.genblk1.regfile.regs[3][31:0]
++{x4/tp   } TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.regfile.genblk1.genblk1.regfile.regs[4][31:0]
++{x5/t0   } TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.regfile.genblk1.genblk1.regfile.regs[5][31:0]
++{x6/t1   } TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.regfile.genblk1.genblk1.regfile.regs[6][31:0]
++{x7/t2   } TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.regfile.genblk1.genblk1.regfile.regs[7][31:0]
++{x8/s0   } TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.regfile.genblk1.genblk1.regfile.regs[8][31:0]
++{x9/s1   } TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.regfile.genblk1.genblk1.regfile.regs[9][31:0]
++{x10/a0  } TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.regfile.genblk1.genblk1.regfile.regs[10][31:0]
++{x11/a1  } TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.regfile.genblk1.genblk1.regfile.regs[11][31:0]
++{x12/a2  } TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.regfile.genblk1.genblk1.regfile.regs[12][31:0]
++{x13/a3  } TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.regfile.genblk1.genblk1.regfile.regs[13][31:0]
++{x14/a4  } TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.regfile.genblk1.genblk1.regfile.regs[14][31:0]
++{x15/a5  } TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.regfile.genblk1.genblk1.regfile.regs[15][31:0]
++{x16/a6  } TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.regfile.genblk1.genblk1.regfile.regs[16][31:0]
++{x17/a7  } TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.regfile.genblk1.genblk1.regfile.regs[17][31:0]
++{x18/s2  } TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.regfile.genblk1.genblk1.regfile.regs[18][31:0]
++{x19/s3  } TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.regfile.genblk1.genblk1.regfile.regs[19][31:0]
++{x20/s4  } TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.regfile.genblk1.genblk1.regfile.regs[20][31:0]
++{x21/s5  } TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.regfile.genblk1.genblk1.regfile.regs[21][31:0]
++{x22/s6  } TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.regfile.genblk1.genblk1.regfile.regs[22][31:0]
++{x23/s7  } TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.regfile.genblk1.genblk1.regfile.regs[23][31:0]
++{x24/s8  } TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.regfile.genblk1.genblk1.regfile.regs[24][31:0]
++{x25/s9  } TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.regfile.genblk1.genblk1.regfile.regs[25][31:0]
++{x26/s10 } TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.regfile.genblk1.genblk1.regfile.regs[26][31:0]
++{x27/s11 } TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.regfile.genblk1.genblk1.regfile.regs[27][31:0]
++{x28/t3  } TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.regfile.genblk1.genblk1.regfile.regs[28][31:0]
++{x29/t4  } TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.regfile.genblk1.genblk1.regfile.regs[29][31:0]
++{x30/t5  } TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.regfile.genblk1.genblk1.regfile.regs[30][31:0]
++{x31/t6  } TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.regfile.genblk1.genblk1.regfile.regs[31][31:0]
+@1401200
+-GPR
+@c00200
+-Stages
+-IF
+-IBus
+@28
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fetch_stage.ibus_ack
+@22
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fetch_stage.ibus_addr[31:0]
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fetch_stage.ibus_be[3:0]
+@28
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fetch_stage.ibus_busy
+@22
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fetch_stage.ibus_rd_data[31:0]
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fetch_stage.ibus_rd_data_reg[31:0]
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fetch_stage.ibus_rd_data_saved[31:0]
+@28
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fetch_stage.ibus_rd_en
+@22
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fetch_stage.ibus_wr_data[31:0]
+@28
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fetch_stage.ibus_wr_en
+@1401200
+-IBus
+@c00200
+-Inputs
+@22
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fetch_stage.i_alu_out[31:0]
+@28
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fetch_stage.i_br_instr_bp
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fetch_stage.i_clk
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fetch_stage.i_compressed
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fetch_stage.i_cond_br_bp
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fetch_stage.i_en_fetch
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fetch_stage.i_freeze_pc
+@22
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fetch_stage.i_imm[31:0]
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fetch_stage.i_imm_bp[31:0]
+@28
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fetch_stage.i_jalr_instr_bp
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fetch_stage.i_offset_pc
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fetch_stage.i_refetch
+@22
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fetch_stage.i_rf_rd1_data[31:0]
+@28
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fetch_stage.i_rst
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fetch_stage.i_sel_pc[2:0]
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fetch_stage.i_sleep
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fetch_stage.i_update_pc
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fetch_stage.i_wb_state
+@1401200
+-Inputs
+@c00200
+-Outputs
+@28
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fetch_stage.o_bad_predict
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fetch_stage.o_bypass_decomp
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fetch_stage.o_half_npc_addr
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fetch_stage.o_half_pc_addr
+@22
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fetch_stage.o_instr[31:0]
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fetch_stage.o_minstret[63:0]
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fetch_stage.o_pc[31:0]
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fetch_stage.o_pc_inc[31:0]
+@1401200
+-Outputs
+@c00200
+-Signals
+@22
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fetch_stage.alu_out[31:0]
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fetch_stage.alu_out_reg[31:0]
+@28
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fetch_stage.bad_predict
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fetch_stage.bad_predict_gate
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fetch_stage.bad_predict_gate_reg
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fetch_stage.bad_predict_pulse
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fetch_stage.bad_predict_reg
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fetch_stage.branch_instr
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fetch_stage.bypass_decomp
+@22
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fetch_stage.computed_pc[31:0]
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fetch_stage.computed_pc_reg[31:0]
+@28
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fetch_stage.debug_flag
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fetch_stage.en_fetch_reg
+@22
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fetch_stage.fetch_addr[31:0]
+@28
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fetch_stage.fetch_alternate
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fetch_stage.fetch_alternate_reg
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fetch_stage.half_npc_addr
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fetch_stage.half_pc_addr
+@22
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fetch_stage.imm_reg[31:0]
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fetch_stage.instr[31:0]
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fetch_stage.minstret[63:0]
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fetch_stage.minstret_reg_out[63:0]
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fetch_stage.next_pc[31:0]
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fetch_stage.pc[31:0]
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fetch_stage.pc_inc[31:0]
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fetch_stage.pc_inc_reg[31:0]
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fetch_stage.pc_inc_reg_out[31:0]
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fetch_stage.pc_reg[31:0]
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fetch_stage.pc_reg_out[31:0]
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fetch_stage.predicted_pc[31:0]
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fetch_stage.predicted_pc_reg[31:0]
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fetch_stage.rf_rd1_data_reg[31:0]
+@28
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fetch_stage.sel_pc_reg[2:0]
+@1401200
+-Signals
+-IF
+@c00200
+-ID
+@28
+[color] 2
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.decode_stage.illegal
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.decode_stage.i_en_decode
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.decode_stage.instr_type[2:0]
+@22
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.decode_stage.instr[31:0]
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.decode_stage.i_instr[31:0]
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.decode_stage.instr_reg[31:0]
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.decode_stage.imm[31:0]
+@800200
+-Outputs
+@28
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.decode_stage.o_br_instr_bp
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.decode_stage.o_cond_br_bp
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.decode_stage.o_cond_branch
+@c00022
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.decode_stage.o_csr_addr[11:0]
+@28
+(0)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.decode_stage.o_csr_addr[11:0]
+(1)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.decode_stage.o_csr_addr[11:0]
+(2)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.decode_stage.o_csr_addr[11:0]
+(3)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.decode_stage.o_csr_addr[11:0]
+(4)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.decode_stage.o_csr_addr[11:0]
+(5)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.decode_stage.o_csr_addr[11:0]
+(6)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.decode_stage.o_csr_addr[11:0]
+(7)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.decode_stage.o_csr_addr[11:0]
+(8)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.decode_stage.o_csr_addr[11:0]
+(9)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.decode_stage.o_csr_addr[11:0]
+(10)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.decode_stage.o_csr_addr[11:0]
+(11)TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.decode_stage.o_csr_addr[11:0]
+@1401200
+-group_end
+@28
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.decode_stage.o_dmem_rd
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.decode_stage.o_dmem_sext
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.decode_stage.o_dmem_wr
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.decode_stage.o_en_wb
+@22
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.decode_stage.o_imm[31:0]
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.decode_stage.o_imm_bp[31:0]
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.decode_stage.o_instr_name[31:0]
+@28
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.decode_stage.o_jalr_instr_bp
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.decode_stage.o_jump_reg
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.decode_stage.o_opa_signed
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.decode_stage.o_opb_signed
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.decode_stage.o_ren_csr
+@22
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.decode_stage.o_rf_rd1_addr[4:0]
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.decode_stage.o_rf_rd2_addr[4:0]
+@28
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.decode_stage.o_rf_rd2_used
+@22
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.decode_stage.o_rf_wr_addr[4:0]
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.decode_stage.o_sel_alu_op[3:0]
+@28
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.decode_stage.o_sel_alu_opa[1:0]
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.decode_stage.o_sel_alu_opb[2:0]
+@22
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.decode_stage.o_sel_br[3:0]
+@28
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.decode_stage.o_sel_csr_op[1:0]
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.decode_stage.o_sel_csr_wr[1:0]
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.decode_stage.o_sel_dmem_be[1:0]
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.decode_stage.o_sel_md_op[2:0]
+@22
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.decode_stage.o_sel_wb[3:0]
+@28
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.decode_stage.o_swap_bytes
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.decode_stage.o_wen_csr
+@1000200
+-Outputs
+@1401200
+-ID
+@c00200
+-EX
+@1401200
+-EX
+@c00200
+-MA
+@1401200
+-MA
+@c00200
+-WB
+@1401200
+-WB
+-Stages
+@c00200
+-FSM
+-Outputs
+@28
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fsm.o_en_decode
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fsm.o_en_decomp
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fsm.o_en_dmem_rd
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fsm.o_en_dmem_wr
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fsm.o_en_exec
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fsm.o_en_fetch
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fsm.o_en_rf_rd1
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fsm.o_en_rf_rd2
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fsm.o_en_wb
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fsm.o_update_comp
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fsm.o_update_pc
+TOP.soc_wrapper_top.soc_top_level.nonpipe.cpu.fsm.o_wb_state
+@1401200
+-Outputs
+-FSM
+@1000200
+-CPU
+@c00200
+-SOC
+@c00022
+TOP.soc_wrapper_top.io_gpio[23:0]
+@28
+(0)TOP.soc_wrapper_top.io_gpio[23:0]
+(1)TOP.soc_wrapper_top.io_gpio[23:0]
+(2)TOP.soc_wrapper_top.io_gpio[23:0]
+(3)TOP.soc_wrapper_top.io_gpio[23:0]
+(4)TOP.soc_wrapper_top.io_gpio[23:0]
+(5)TOP.soc_wrapper_top.io_gpio[23:0]
+(6)TOP.soc_wrapper_top.io_gpio[23:0]
+(7)TOP.soc_wrapper_top.io_gpio[23:0]
+(8)TOP.soc_wrapper_top.io_gpio[23:0]
+(9)TOP.soc_wrapper_top.io_gpio[23:0]
+(10)TOP.soc_wrapper_top.io_gpio[23:0]
+(11)TOP.soc_wrapper_top.io_gpio[23:0]
+(12)TOP.soc_wrapper_top.io_gpio[23:0]
+(13)TOP.soc_wrapper_top.io_gpio[23:0]
+(14)TOP.soc_wrapper_top.io_gpio[23:0]
+(15)TOP.soc_wrapper_top.io_gpio[23:0]
+(16)TOP.soc_wrapper_top.io_gpio[23:0]
+(17)TOP.soc_wrapper_top.io_gpio[23:0]
+(18)TOP.soc_wrapper_top.io_gpio[23:0]
+(19)TOP.soc_wrapper_top.io_gpio[23:0]
+(20)TOP.soc_wrapper_top.io_gpio[23:0]
+(21)TOP.soc_wrapper_top.io_gpio[23:0]
+(22)TOP.soc_wrapper_top.io_gpio[23:0]
+(23)TOP.soc_wrapper_top.io_gpio[23:0]
+@1401200
+-group_end
+@c00200
+-IMEM
+@22
+TOP.soc_wrapper_top.soc_top_level.imem.imem.get_mem_addr__Vstatic__data[31:2]
+TOP.soc_wrapper_top.soc_top_level.imem.imem.addr[13:0]
+TOP.soc_wrapper_top.soc_top_level.imem.imem.i_addr[31:2]
+TOP.soc_wrapper_top.soc_top_level.imem.imem.i_be[3:0]
+@28
+TOP.soc_wrapper_top.soc_top_level.imem.imem.i_clk
+TOP.soc_wrapper_top.soc_top_level.imem.imem.i_rd_en
+TOP.soc_wrapper_top.soc_top_level.imem.imem.i_rst
+@22
+TOP.soc_wrapper_top.soc_top_level.imem.imem.i_wr_data[31:0]
+@28
+TOP.soc_wrapper_top.soc_top_level.imem.imem.i_wr_en
+@22
+TOP.soc_wrapper_top.soc_top_level.imem.imem.masked_addr[31:2]
+@28
+TOP.soc_wrapper_top.soc_top_level.imem.imem.o_ack
+TOP.soc_wrapper_top.soc_top_level.imem.imem.o_busy
+@22
+TOP.soc_wrapper_top.soc_top_level.imem.imem.o_rd_data[31:0]
+TOP.soc_wrapper_top.soc_top_level.imem.imem.p_addr_base[31:0]
+TOP.soc_wrapper_top.soc_top_level.imem.imem.p_addr_mask[31:0]
+TOP.soc_wrapper_top.soc_top_level.imem.imem.p_depth_pw2[31:0]
+TOP.soc_wrapper_top.soc_top_level.imem.imem.p_init_file[751:0]
+TOP.soc_wrapper_top.soc_top_level.imem.imem.p_init_mem[31:0]
+TOP.soc_wrapper_top.soc_top_level.imem.imem.p_init_val[31:0]
+TOP.soc_wrapper_top.soc_top_level.imem.imem.rd_data[31:0]
+@1401200
+-IMEM
+@c00200
+-DMEM
+@22
+TOP.soc_wrapper_top.soc_top_level.dmem.dmem.get_mem_addr__Vstatic__data[31:2]
+TOP.soc_wrapper_top.soc_top_level.dmem.dmem.i_addr[31:2]
+TOP.soc_wrapper_top.soc_top_level.dmem.dmem.i_be[3:0]
+@28
+TOP.soc_wrapper_top.soc_top_level.dmem.dmem.i_clk
+TOP.soc_wrapper_top.soc_top_level.dmem.dmem.i_rd_en
+TOP.soc_wrapper_top.soc_top_level.dmem.dmem.i_rst
+@22
+TOP.soc_wrapper_top.soc_top_level.dmem.dmem.i_wr_data[31:0]
+@28
+TOP.soc_wrapper_top.soc_top_level.dmem.dmem.i_wr_en
+@22
+TOP.soc_wrapper_top.soc_top_level.dmem.dmem.masked_addr[31:2]
+@28
+TOP.soc_wrapper_top.soc_top_level.dmem.dmem.o_ack
+TOP.soc_wrapper_top.soc_top_level.dmem.dmem.o_busy
+@22
+TOP.soc_wrapper_top.soc_top_level.dmem.dmem.o_rd_data[31:0]
+TOP.soc_wrapper_top.soc_top_level.dmem.dmem.p_addr_base[31:0]
+TOP.soc_wrapper_top.soc_top_level.dmem.dmem.p_addr_mask[31:0]
+TOP.soc_wrapper_top.soc_top_level.dmem.dmem.p_depth_pw2[31:0]
+TOP.soc_wrapper_top.soc_top_level.dmem.dmem.p_init_file[751:0]
+TOP.soc_wrapper_top.soc_top_level.dmem.dmem.p_init_mem[31:0]
+TOP.soc_wrapper_top.soc_top_level.dmem.dmem.p_init_val[31:0]
+TOP.soc_wrapper_top.soc_top_level.dmem.dmem.rd_data[31:0]
+@1401200
+-DMEM
+-SOC
+[pattern_trace] 1
+[pattern_trace] 0
