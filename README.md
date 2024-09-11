@@ -21,6 +21,7 @@ Supported RISC-V extensions: `RV32`[`I`/`E`][`M`][`C`][`Zicsr`]
 - Architectural flexibility for generating a wide array of microarchitectures.
 - Designed to cater to diverse performance requirements and application scenarios.
 - Suited for both FPGA and physical (ASIC) implementation.
+- Uses [Odatix](https://github.com/jsaussereau/Odatix) to help you find the configuration that best suits your application needs.
 
 ## Contact
 
