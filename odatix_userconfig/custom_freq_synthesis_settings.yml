@@ -1,6 +1,6 @@
 
 ##############################################
-# Odatix settings for simulations
+# Odatix settings for custom freq synthesis
 ##############################################
 
 # overwrite existing results
@@ -19,11 +19,10 @@ log_size_limit:   300  # overridden by --logsize
 nb_jobs:          8    # overridden by -j / --jobs
 
 # targeted architectures
-simulations: 
+architectures: 
 
 #--------------------------------------------#
 # AsteRISC
 #--------------------------------------------#
-
-  - dhrystone:
-    - AsteRISC/* + MEM/1024I_1024D + Baseline/I + Mul/Off
+  
+  - AsteRISC/* + MEM/1024I_1024D + Baseline/I + Mul/*

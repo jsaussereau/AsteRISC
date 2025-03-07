@@ -2,19 +2,21 @@
 ##############################################
 # Odatix settings for fmax synthesis
 ##############################################
----
 
 # overwrite existing results
-overwrite:        No
+overwrite:        No   # overridden by -o / --overwrite
 
 # prompt 'Continue? (Y/n)' after settings checks
-ask_continue:     Yes
+ask_continue:     Yes  # overridden by -y / --noask
 
-# show synthesis log if there is only one architecture selected
-show_log_if_one:  Yes
+# exit monitor when all jobs are done
+exit_when_done:   No   # overridden by -E / --exit
 
-# maximum number of parallel synthesis
-nb_jobs:          8
+# size of the log history per job in the monitor
+log_size_limit:   300  # overridden by --logsize
+
+# maximum number of parallel jobs
+nb_jobs:          8    # overridden by -j / --jobs
 
 # targeted architectures
 architectures: 
@@ -23,84 +25,4 @@ architectures:
 # AsteRISC
 #--------------------------------------------#
 
-  # - AsteRISC_RV32I_soc_08S-08S/M0000
-  # - AsteRISC_RV32I_soc_08S-08S/M0001
-  # - AsteRISC_RV32I_soc_08S-08S/M0008
-  # - AsteRISC_RV32I_soc_08S-08S/M0016
-  # - AsteRISC_RV32I_soc_08S-08S/M0024
-  # - AsteRISC_RV32I_soc_08S-08S/M0025
-  # - AsteRISC_RV32I_soc_08S-08S/M0036
-  # - AsteRISC_RV32I_soc_08S-08S/M0037
-  # - AsteRISC_RV32I_soc_08S-08S/M0039
-  # - AsteRISC_RV32I_soc_08S-08S/M0044
-  # - AsteRISC_RV32I_soc_08S-08S/M0052
-  # - AsteRISC_RV32I_soc_08S-08S/M0060
-  # - AsteRISC_RV32I_soc_08S-08S/M0061
-  # - AsteRISC_RV32I_soc_08S-08S/M0100
-  # - AsteRISC_RV32I_soc_08S-08S/M0108
-
-  - AsteRISC_RV32I_soc_10S-10S/M0000
-  - AsteRISC_RV32I_soc_10S-10S/M0001
-  - AsteRISC_RV32I_soc_10S-10S/M0008
-  - AsteRISC_RV32I_soc_10S-10S/M0016
-  - AsteRISC_RV32I_soc_10S-10S/M0024
-  - AsteRISC_RV32I_soc_10S-10S/M0025
-  - AsteRISC_RV32I_soc_10S-10S/M0036
-  - AsteRISC_RV32I_soc_10S-10S/M0037
-  - AsteRISC_RV32I_soc_10S-10S/M0039
-  - AsteRISC_RV32I_soc_10S-10S/M0044
-  - AsteRISC_RV32I_soc_10S-10S/M0052
-  - AsteRISC_RV32I_soc_10S-10S/M0060
-  - AsteRISC_RV32I_soc_10S-10S/M0061
-  - AsteRISC_RV32I_soc_10S-10S/M0100
-  - AsteRISC_RV32I_soc_10S-10S/M0108
-
-  # - AsteRISC_RV32IM_m1c_soc_10S-10S/M0000
-  # - AsteRISC_RV32IM_m1c_soc_10S-10S/M0001
-  # - AsteRISC_RV32IM_m1c_soc_10S-10S/M0008
-  # - AsteRISC_RV32IM_m1c_soc_10S-10S/M0016
-  # - AsteRISC_RV32IM_m1c_soc_10S-10S/M0024
-  # - AsteRISC_RV32IM_m1c_soc_10S-10S/M0025
-  # - AsteRISC_RV32IM_m1c_soc_10S-10S/M0036
-  # - AsteRISC_RV32IM_m1c_soc_10S-10S/M0037
-  # - AsteRISC_RV32IM_m1c_soc_10S-10S/M0039
-  # - AsteRISC_RV32IM_m1c_soc_10S-10S/M0044
-  # - AsteRISC_RV32IM_m1c_soc_10S-10S/M0052
-  # - AsteRISC_RV32IM_m1c_soc_10S-10S/M0060
-  # - AsteRISC_RV32IM_m1c_soc_10S-10S/M0061
-  # - AsteRISC_RV32IM_m1c_soc_10S-10S/M0100
-  # - AsteRISC_RV32IM_m1c_soc_10S-10S/M0108
-  # - AsteRISC_RV32IM_m1c_soc_10S-10S/M0000
-
-  # - AsteRISC_RV32IM_mfast_soc_10S-10S/M0000
-  # - AsteRISC_RV32IM_mfast_soc_10S-10S/M0001
-  # - AsteRISC_RV32IM_mfast_soc_10S-10S/M0008
-  # - AsteRISC_RV32IM_mfast_soc_10S-10S/M0016
-  # - AsteRISC_RV32IM_mfast_soc_10S-10S/M0024
-  # - AsteRISC_RV32IM_mfast_soc_10S-10S/M0025
-  # - AsteRISC_RV32IM_mfast_soc_10S-10S/M0036
-  # - AsteRISC_RV32IM_mfast_soc_10S-10S/M0037
-  # - AsteRISC_RV32IM_mfast_soc_10S-10S/M0039
-  # - AsteRISC_RV32IM_mfast_soc_10S-10S/M0044
-  # - AsteRISC_RV32IM_mfast_soc_10S-10S/M0052
-  # - AsteRISC_RV32IM_mfast_soc_10S-10S/M0060
-  # - AsteRISC_RV32IM_mfast_soc_10S-10S/M0061
-  # - AsteRISC_RV32IM_mfast_soc_10S-10S/M0100
-  # - AsteRISC_RV32IM_mfast_soc_10S-10S/M0108
-
-  # - AsteRISC_RV32IM_mslow_soc_10S-10S/M0000
-  # - AsteRISC_RV32IM_mslow_soc_10S-10S/M0001
-  # - AsteRISC_RV32IM_mslow_soc_10S-10S/M0008
-  # - AsteRISC_RV32IM_mslow_soc_10S-10S/M0016
-  # - AsteRISC_RV32IM_mslow_soc_10S-10S/M0024
-  # - AsteRISC_RV32IM_mslow_soc_10S-10S/M0025
-  # - AsteRISC_RV32IM_mslow_soc_10S-10S/M0036
-  # - AsteRISC_RV32IM_mslow_soc_10S-10S/M0037
-  # - AsteRISC_RV32IM_mslow_soc_10S-10S/M0039
-  # - AsteRISC_RV32IM_mslow_soc_10S-10S/M0044
-  # - AsteRISC_RV32IM_mslow_soc_10S-10S/M0052
-  # - AsteRISC_RV32IM_mslow_soc_10S-10S/M0060
-  # - AsteRISC_RV32IM_mslow_soc_10S-10S/M0061
-  # - AsteRISC_RV32IM_mslow_soc_10S-10S/M0100
-  # - AsteRISC_RV32IM_mslow_soc_10S-10S/M0108
-...
+  - AsteRISC/* + MEM/1024I_1024D + Baseline/I + Mul/*
