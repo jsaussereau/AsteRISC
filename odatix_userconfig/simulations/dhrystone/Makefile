@@ -25,7 +25,7 @@
 
 PWD = $(shell pwd)
 WORK_DIR = $(PWD)
-ASTERISM_DIR = ../../Asterism
+ASTERISC_DIR = ../../../../../
 RTL_DIR = ../../AsteRISC-rtl/rtl
 OBJ_DIR = $(PWD)/obj
 LOG_DIR = $(PWD)/log
@@ -40,14 +40,14 @@ ENV_SET = export LC_ALL=C; unset LANGUAGE;
 
 INCLUDE_ALL_SCRIPT  = $(WORK_DIR)/include_all.py
 
-RV_TEST_IMEM_FILE   = $(ASTERISM_DIR)/../AsteRISC-firmware/hex/Tests_RV32I/tests_imem.hex
-RV_TEST_DMEM_FILE   = $(ASTERISM_DIR)/../AsteRISC-firmware/hex/Tests_RV32I/tests_dmem.hex
-DHRYSTONE_IMEM_FILE = $(ASTERISM_DIR)/../AsteRISC-firmware/hex/Dhrystone_RV32I/dhrystone_benchmark_imem.hex
-DHRYSTONE_DMEM_FILE = $(ASTERISM_DIR)/../AsteRISC-firmware/hex/Dhrystone_RV32I/dhrystone_benchmark_dmem.hex
-DHRYSTONE_M_IMEM_FILE = $(ASTERISM_DIR)/../AsteRISC-firmware/hex/Dhrystone_RV32IM/dhrystone_benchmark_imem.hex
-DHRYSTONE_M_DMEM_FILE = $(ASTERISM_DIR)/../AsteRISC-firmware/hex/Dhrystone_RV32IM/dhrystone_benchmark_dmem.hex
-COREMARK_IMEM_FILE  = $(ASTERISM_DIR)/../AsteRISC-firmware/hex/Coremark_RV32I/coremark_benchmark_imem.hex
-COREMARK_DMEM_FILE  = $(ASTERISM_DIR)/../AsteRISC-firmware/hex/Coremark_RV32M/coremark_benchmark_dmem.hex
+RV_TEST_IMEM_FILE   = $(ASTERISC_DIR)/AsteRISC-firmware/hex/Tests_RV32I/tests_imem.hex
+RV_TEST_DMEM_FILE   = $(ASTERISC_DIR)/AsteRISC-firmware/hex/Tests_RV32I/tests_dmem.hex
+DHRYSTONE_IMEM_FILE = $(ASTERISC_DIR)/AsteRISC-firmware/hex/Dhrystone_RV32I/dhrystone_benchmark_imem.hex
+DHRYSTONE_DMEM_FILE = $(ASTERISC_DIR)/AsteRISC-firmware/hex/Dhrystone_RV32I/dhrystone_benchmark_dmem.hex
+DHRYSTONE_M_IMEM_FILE = $(ASTERISC_DIR)/AsteRISC-firmware/hex/Dhrystone_RV32IM/dhrystone_benchmark_imem.hex
+DHRYSTONE_M_DMEM_FILE = $(ASTERISC_DIR)/AsteRISC-firmware/hex/Dhrystone_RV32IM/dhrystone_benchmark_dmem.hex
+COREMARK_IMEM_FILE  = $(ASTERISC_DIR)/AsteRISC-firmware/hex/Coremark_RV32I/coremark_benchmark_imem.hex
+COREMARK_DMEM_FILE  = $(ASTERISC_DIR)/AsteRISC-firmware/hex/Coremark_RV32M/coremark_benchmark_dmem.hex
 
 ########################################################
 # Simulation Parameters
@@ -56,8 +56,8 @@ COREMARK_DMEM_FILE  = $(ASTERISM_DIR)/../AsteRISC-firmware/hex/Coremark_RV32M/co
 MODULE = soc_wrapper_top
 VCD_FILE = $(VCD_DIR)/$(MODULE).vcd
 
-IMEM_FILE = $(DHRYSTONE_M_IMEM_FILE)
-DMEM_FILE = $(DHRYSTONE_M_DMEM_FILE)
+IMEM_FILE = $(DHRYSTONE_IMEM_FILE)
+DMEM_FILE = $(DHRYSTONE_DMEM_FILE)
 
 IMEM_DEPTH = 11
 DMEM_DEPTH = 11
