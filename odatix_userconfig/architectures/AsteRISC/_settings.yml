@@ -1,0 +1,106 @@
+
+###########################################
+# Settings for AsteRISC_RV32I_soc_10S-10S #
+###########################################
+
+rtl_path: "AsteRISC-rtl/rtl"
+
+top_level_file: "soc/soc_wrapper_top.sv"
+top_level_module: "soc_wrapper_top"
+rtl_file_format: ".sv"
+
+clock_signal: "i_xtal_p"
+reset_signal: "i_rst"
+
+# Copy a file into synthesis directory?
+file_copy_enable: Yes
+file_copy_source: "config/soc_config_fpga.sv"
+file_copy_dest: "rtl/soc_config.sv"
+
+# Delimiters for parameter files
+param_target_file: rtl/soc/soc_wrapper_top.sv
+use_parameters: Yes
+start_delimiter: "  // <main>"
+stop_delimiter: "  // </main>"
+
+# Configuration generation
+generate_configurations: Yes
+generate_configurations_settings:
+  template: 
+    - ""
+    - "  parameter p_pipeline        = 0,"
+    - "  parameter p_stage_IF        = 1,"
+    - "  parameter p_stage_IC        = 0,"
+    - "  parameter p_stage_ID        = 1,"
+    - "  parameter p_stage_RF        = 1,"
+    - "  parameter p_stage_EX        = 1,"
+    - "  parameter p_stage_MA        = 1,"
+    - "  parameter p_stage_WB        = 1,"
+    - ""
+    - "  parameter p_prefetch_buf    = $p_prefetch_buf,"
+    - "  parameter p_decode_buf      = $p_decode_buf,"
+    - "  parameter p_rf_sp           = $p_rf_sp,"
+    - "  parameter p_rf_read_buf     = $p_rf_read_buf,"
+    - "  parameter p_branch_buf      = $p_branch_buf,"
+    - "  parameter p_mem_buf         = $p_mem_buf,"
+    - "  parameter p_wb_buf          = $p_wb_buf,"
+    
+  name: "M${value_dec}"
+  
+  bool_true: 1
+  bool_false: 0
+
+  variables:
+    p_prefetch_buf:
+      type: bool
+    p_decode_buf:
+      type: bool
+    p_branch_buf:
+      type: bool
+    p_mem_buf:
+      type: bool
+    p_wb_buf:
+      type: bool
+    p_rf_sp:
+      type: bool
+    p_rf_read_buf:
+      type: bool
+
+    value_bin:
+      type: format
+      settings:
+        source: "${p_prefetch_buf}${p_decode_buf}${p_branch_buf}${p_mem_buf}${p_wb_buf}${p_rf_sp}${p_rf_read_buf}"
+    value_dec:
+      type: conversion
+      format: "%04d"
+      settings:
+        from: bin
+        to: dec
+        source: ${value_bin}
+
+fmax_synthesis:
+  lower_bound: 50
+  upper_bound: 2000
+custom_freq_synthesis:
+  list: [50]
+
+# target-specific options
+xc7s25-csga225-1: 
+  fmax_synthesis:
+    lower_bound: 50
+    upper_bound: 170
+xc7a100t-csg324-1:
+  fmax_synthesis:
+    lower_bound: 50
+    upper_bound: 300
+xc7k70t-fbg676-2:
+  fmax_synthesis:
+    lower_bound: 80
+    upper_bound: 300
+ST28CMOSFDSOI:
+  fmax_synthesis:
+    lower_bound: 500
+    upper_bound: 2000
+  file_copy_enable: Yes
+  file_copy_source: "config/soc_config_asic_st28.sv"
+  file_copy_dest: "rtl/soc_config.sv"

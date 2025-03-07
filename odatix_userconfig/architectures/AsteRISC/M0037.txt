@@ -1,0 +1,20 @@
+
+  parameter p_pipeline        = 0,
+
+  // pipeline settings:
+  parameter p_stage_IF        = 1,
+  parameter p_stage_IC        = 0,
+  parameter p_stage_ID        = 1,
+  parameter p_stage_RF        = 1,
+  parameter p_stage_EX        = 1,
+  parameter p_stage_MA        = 1,
+  parameter p_stage_WB        = 1,
+
+  // non pipeline settings:
+  parameter p_prefetch_buf    = 0,            //! use a prefetch buffer
+  parameter p_decode_buf      = 1,            //! add buffers to decode stage outputs
+  parameter p_rf_sp           = 0,            //! register file is a single port ram
+  parameter p_rf_read_buf     = 1,            //! register file has synchronous read
+  parameter p_branch_buf      = 0,            //! add buffers to mem stage inputs
+  parameter p_mem_buf         = 0,            //! add buffers to write back stage inputs
+  parameter p_wb_buf          = 1,            //! add buffers to alu comp outputs (+1 cycle for conditionnal branches)
