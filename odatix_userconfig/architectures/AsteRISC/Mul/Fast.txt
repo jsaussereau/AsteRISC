@@ -1,0 +1,4 @@
+  
+  parameter p_ext_rvm         = 1,            //! use RV32M extension (multiplication and division)
+  parameter p_mul_fast        = 1,            //! fast mul
+  parameter p_mul_1_cycle     = 0,            //! one cycle mul

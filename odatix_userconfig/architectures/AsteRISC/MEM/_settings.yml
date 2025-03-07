@@ -1,0 +1,34 @@
+
+###########################################
+# Parameter Domain - IMEM                  #
+###########################################
+
+start_delimiter: "  // <mem>"
+stop_delimiter: "  // </mem>"
+
+generate_configurations: Yes
+generate_configurations_settings:
+  template: 
+  - ""
+  - " parameter p_imem_depth_pw2  = $imem_depth,"
+  - " parameter p_dmem_depth_pw2  = $dmem_depth,"
+  name: "${imem_depth_pw2}I_${dmem_depth_pw2}D"
+  variables:
+    imem_depth:
+      type: range
+      settings:
+        from: 8
+        to: 12
+    dmem_depth:
+      type: range
+      settings:
+        from: 8
+        to: 12
+    imem_depth_pw2:
+      type: function
+      settings:
+        op: 2^$imem_depth
+    dmem_depth_pw2:
+      type: function
+      settings:
+        op: 2^$dmem_depth
