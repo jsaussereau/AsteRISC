@@ -1,3 +1,6 @@
 [submodule "AsteRISC-rtl"]
 	path = AsteRISC-rtl
 	url = https://github.com/jsaussereau/AsteRISC-rtl.git
+[submodule "AsteRISC-firmware"]
+	path = AsteRISC-firmware
+	url = https://github.com/jsaussereau/AsteRISC-firmware
