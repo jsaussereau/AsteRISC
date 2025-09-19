@@ -24,7 +24,7 @@
 ########################################################
 
 ASTERISM_DIR            = Asterism
-DHRYSTONE_WORK          = work/simulations/Dhrystone
+DHRYSTONE_WORK          = work/simulations
 
 ########################################################
 # Files
@@ -32,7 +32,7 @@ DHRYSTONE_WORK          = work/simulations/Dhrystone
 
 ODATIX_COMMAND          = odatix
 ODATIX_EXPLORE_COMMAND  = odatix-explorer
-DHRYSTONE_SETTINGS      = simulations/_run_dhrystone_settings.yml
+DHRYSTONE_SETTINGS      = odatix_userconfig/simulations/_run_dhrystone_settings.yml
 
 ########################################################
 # Text formatting
