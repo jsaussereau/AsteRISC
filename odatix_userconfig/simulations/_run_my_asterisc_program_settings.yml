@@ -26,7 +26,7 @@ simulations:
 # AsteRISC
 #--------------------------------------------#
 
-  - dhrystone:
-    - AsteRISC/* + MEM/1024I_1024D + Baseline/I + Mul/Off
+  - my_asterisc_program:
+    - AsteRISC/* + MEM/4096I_4096D + Baseline/I + Mul/Off
 
 ...

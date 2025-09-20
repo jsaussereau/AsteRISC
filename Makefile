@@ -29,9 +29,10 @@ DHRYSTONE_WORK          = work/simulations
 # Files
 ########################################################
 
-ODATIX_COMMAND          = odatix
-ODATIX_EXPLORE_COMMAND  = odatix-explorer
-DHRYSTONE_SETTINGS      = odatix_userconfig/simulations/_run_dhrystone_settings.yml
+ODATIX_COMMAND               = odatix
+ODATIX_EXPLORE_COMMAND       = odatix-explorer
+DHRYSTONE_SETTINGS           = odatix_userconfig/simulations/_run_dhrystone_settings.yml
+MY_ASTERISC_PROGRAM_SETTINGS = odatix_userconfig/simulations/_run_my_asterisc_program_settings.yml
 
 ########################################################
 # Text formatting
@@ -95,7 +96,7 @@ clean:
 
 .PHONY: sim
 sim: motd
-	@$(ODATIX_COMMAND) sim --nobanner
+	@$(ODATIX_COMMAND) sim -i $(MY_ASTERISC_PROGRAM_SETTINGS) --nobanner
 
 .PHONY: benchmarks
 benchmarks: motd benchmarks_only results_benchmarks
