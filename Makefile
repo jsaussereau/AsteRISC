@@ -145,6 +145,25 @@ clean_dc:
 	@$(ODATIX_COMMAND) clean --quiet --nobanner
 
 ########################################################
+# Firmware
+########################################################
+
+.PHONY: firmware
+firmware:
+	@+$(MAKE) -C AsteRISC-firmware/firmware --no-print-directory
+
+.PHONY: new
+new:
+	@+$(MAKE) -C AsteRISC-firmware/firmware $@ --no-print-directory
+
+.PHONY: delete
+delete:
+	@+$(MAKE) -C AsteRISC-firmware/firmware $@ --no-print-directory
+
+.PHONY: del
+del: delete
+
+########################################################
 # Generic
 ########################################################
 
