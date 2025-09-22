@@ -50,6 +50,7 @@ Contents
 
   userguide/installation
   userguide/quick_start
+  userguide/software/index
 
 .. toctree::
   :caption: Documentation
