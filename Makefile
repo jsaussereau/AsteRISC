@@ -29,10 +29,15 @@ DHRYSTONE_WORK          = work/simulations
 # Files
 ########################################################
 
-ODATIX_COMMAND               = odatix
-ODATIX_EXPLORE_COMMAND       = odatix-explorer
-DHRYSTONE_SETTINGS           = odatix_userconfig/simulations/_run_dhrystone_settings.yml
-USER_PROGRAM_SETTINGS = odatix_userconfig/simulations/_run_user_program_settings.yml
+VENV_ACTIVATE_SCRIPT    = activate.sh
+DHRYSTONE_SETTINGS      = odatix_userconfig/simulations/_run_dhrystone_settings.yml
+USER_PROGRAM_SETTINGS   = odatix_userconfig/simulations/_run_user_program_settings.yml
+
+########################################################
+# Commands
+########################################################
+
+VENV_ACTIVATE           = source $(VENV_ACTIVATE_SCRIPT)
 
 ########################################################
 # Text formatting
@@ -88,7 +93,7 @@ motd:
 
 .PHONY: clean
 clean: 
-	@$(ODATIX_COMMAND) clean --nobanner
+	@$/bin/bash -c '$(VENV_ACTIVATE); odatix clean --nobanner'
 
 ########################################################
 # Simulation
@@ -96,18 +101,18 @@ clean:
 
 .PHONY: sim
 sim: motd
-	@$(ODATIX_COMMAND) sim -i $(USER_PROGRAM_SETTINGS) --nobanner
+	@/bin/bash -c '$(VENV_ACTIVATE); odatix sim -i $(USER_PROGRAM_SETTINGS) --nobanner'
 
 .PHONY: benchmarks
 benchmarks: motd benchmarks_only results_benchmarks
 
 .PHONY: benchmarks_only
 benchmarks_only:
-	@$(ODATIX_COMMAND) sim -i $(DHRYSTONE_SETTINGS) --nobanner
+	@/bin/bash -c '$(VENV_ACTIVATE); odatix sim -i $(DHRYSTONE_SETTINGS) --nobanner'
 
 .PHONY: results_benchmarks
 results_benchmarks:
-	@$(ODATIX_COMMAND) res_benchmark --work $(DHRYSTONE_WORK) --nobanner
+	@/bin/bash -c '$(VENV_ACTIVATE); odatix res_benchmark --work $(DHRYSTONE_WORK) --nobanner'
 
 ########################################################
 # Vivado
@@ -118,15 +123,15 @@ vivado: motd run_vivado clean_vivado
 
 .PHONY: run_vivado
 run_vivado: 
-	@$(ODATIX_COMMAND) fmax --tool vivado --nobanner
+	@/bin/bash -c '$(VENV_ACTIVATE); odatix fmax --tool vivado --nobanner'
 
 .PHONY: results_vivado
 results_vivado:
-	@$(ODATIX_COMMAND) res_synth --tool vivado --nobanner
+	@/bin/bash -c '$(VENV_ACTIVATE); odatix res_synth --tool vivado --nobanner'
 
 .PHONY: clean_vivado
 clean_vivado:
-	@$(ODATIX_COMMAND) clean --quiet --nobanner
+	@/bin/bash -c '$(VENV_ACTIVATE); odatix clean --quiet --nobanner'
 
 ########################################################
 # Design Compiler
@@ -134,15 +139,15 @@ clean_vivado:
 
 .PHONY: dc
 dc: motd 
-	@$(ODATIX_COMMAND) fmax --tool design_compiler --nobanner
+	@/bin/bash -c '$(VENV_ACTIVATE); odatix fmax --tool design_compiler --nobanner'
 
 .PHONY: results_dc
 results_dc:
-	@$(ODATIX_COMMAND) res_synth --tool design_compiler --nobanner
+	@/bin/bash -c '$(VENV_ACTIVATE); odatix res_synth --tool design_compiler --nobanner'
 
 .PHONY: clean_dc
 clean_dc:
-	@$(ODATIX_COMMAND) clean --quiet --nobanner
+	@/bin/bash -c '$(VENV_ACTIVATE); odatix clean --quiet --nobanner'
 
 ########################################################
 # Firmware
@@ -177,4 +182,4 @@ results: results_benchmarks results_vivado
 
 .PHONY: explore
 explore:
-	@$(ODATIX_EXPLORE_COMMAND)
+	@/bin/bash -c '$(VENV_ACTIVATE); odatix-explorer'
