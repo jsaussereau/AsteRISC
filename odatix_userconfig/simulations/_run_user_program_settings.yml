@@ -26,7 +26,11 @@ simulations:
 # AsteRISC
 #--------------------------------------------#
 
-  - my_asterisc_program:
+  - user_program:
+    # Run on all main AsteRISC configurations
     - AsteRISC/* + MEM/4096I_4096D + Baseline/I + Mul/Off
+
+    # Run only on M0000
+    # - AsteRISC/M0000 + MEM/4096I_4096D + Baseline/I + Mul/Off
 
 ...

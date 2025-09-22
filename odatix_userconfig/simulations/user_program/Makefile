@@ -40,8 +40,8 @@ ENV_SET = export LC_ALL=C; unset LANGUAGE;
 
 INCLUDE_ALL_SCRIPT  = $(WORK_DIR)/include_all.py
 
-MY_ASTERISC_PROGRAM_IMEM_FILE = $(ASTERISC_DIR)/AsteRISC-firmware/firmware/user_programs/my_asterisc_program/bin/my_asterisc_program_imem.hex
-MY_ASTERISC_PROGRAM_DMEM_FILE = $(ASTERISC_DIR)/AsteRISC-firmware/firmware/user_programs/my_asterisc_program/bin/my_asterisc_program_dmem.hex
+include select_user_program
+export USER_PROGRAM
 
 ########################################################
 # Simulation Parameters
@@ -50,8 +50,8 @@ MY_ASTERISC_PROGRAM_DMEM_FILE = $(ASTERISC_DIR)/AsteRISC-firmware/firmware/user_
 MODULE = soc_wrapper_top
 VCD_FILE = $(VCD_DIR)/$(MODULE).vcd
 
-IMEM_FILE = $(MY_ASTERISC_PROGRAM_IMEM_FILE)
-DMEM_FILE = $(MY_ASTERISC_PROGRAM_DMEM_FILE)
+IMEM_FILE = $(ASTERISC_DIR)/AsteRISC-firmware/firmware/user_programs/$(USER_PROGRAM)/bin/$(USER_PROGRAM)_imem.hex
+DMEM_FILE = $(ASTERISC_DIR)/AsteRISC-firmware/firmware/user_programs/$(USER_PROGRAM)/bin/$(USER_PROGRAM)_dmem.hex
 
 IMEM_DEPTH = 11
 DMEM_DEPTH = 11
