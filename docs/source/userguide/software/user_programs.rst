@@ -12,19 +12,19 @@ Follow the steps in section :doc:`/userguide/software/index` to setup your envir
 Step 2: Create a new program
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-To create a new user program, use the following command in the root of the repository:
+To create a new user program, use the following command in the AsteRISC root directory:
 
-.. code-block:: console
+.. code-block:: bash
 
    make new NAME=your_program_name
 
 To remove an existing user program, use:
 
-.. code-block:: console
+.. code-block:: bash
 
    make del NAME=your_program_name
 
-Step 4: Edit your program
+Step 3: Edit your program
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Your newly created program is located in ``AsteRISC-firmware/firmware/user_programs/your_program_name``. 
@@ -40,7 +40,7 @@ You are free to rename this file and add as many other ``.c`` or ``.h`` source f
 
    Feel free to copy and modify the example programs provided in the ``AsteRISC-firmware/firmware/user_programs/examples`` directory to get started quickly.
 
-Step 5: Add any required libraries or RISC-V extensions
+Step 4: Add any required libraries or RISC-V extensions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 If your program requires additional libraries or RISC-V extensions, you can add them to the ``Makefile`` located in the same directory as your program.
@@ -67,17 +67,39 @@ Another program using UART and the ``M`` RISC-V extension would have a Makefile 
    LIBS   = -lasterisc -lgpio -luart
    # […]
 
-Step 4: Compile your program
+Step 5: Compile your program
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You can compile from the AsteRISC root directory or the AsteRISC-firmware directory with:
 
-.. code-block:: console
+.. code-block:: bash
 
    make firmware
 
 Or from the ``your_program_name`` directory with simply:
 
-.. code-block:: console
+.. code-block:: bash
 
    make
+
+Step 6: Simulate your program
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+First, select your program in the file ``odatix_userconfig/simulations/user_program/select_user_program`` by setting the variable ``USER_PROGRAM`` to your program name. For example:
+
+.. code-block:: makefile
+
+   USER_PROGRAM = your_program_name
+   
+Then, choose your desired AsteRISC configuration in the file ``odatix_userconfig/simulations/_run_user_program_settings.yml``.
+You can select multiple configurations if you want to run several simulations at once. 
+
+.. note::
+
+   By default, the simulation will run on all main AsteRISC configurations.
+
+Finally, run a simulation from the AsteRISC root directory with:
+
+.. code-block:: bash
+
+   make sim

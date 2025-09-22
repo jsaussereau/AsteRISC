@@ -5,43 +5,43 @@ Installation
 Get AsteRISC
 ============
 
-Step 1: Clone the repository
-----------------------------
+Step 1: Install git
+-------------------
 
 .. tabs::
 
    .. group-tab:: Ubuntu/Debian
 
-      .. code-block:: console
+      .. code-block:: bash
 
          sudo apt update
          sudo apt install -y git
-         git clone https://github.com/jsaussereau/AsteRISC.git
-         cd AsteRISC/
-         git submodule update --init --recursive
 
    .. group-tab:: Fedora/CentOS/AlmaLinux
 
-      .. code-block:: console
+      .. code-block:: bash
 
          sudo dnf update
          sudo dnf install -y git
-         git clone https://github.com/jsaussereau/AsteRISC.git
-         cd AsteRISC/
-         git submodule update --init --recursive
 
    .. group-tab:: Arch Linux
 
-      .. code-block:: console
+      .. code-block:: bash
 
          sudo pacman -Syu
          sudo pacman -S git --noconfirm
-         git clone https://github.com/jsaussereau/AsteRISC.git
-         cd AsteRISC/
-         git submodule update --init --recursive
 
-Install Odatix
-==============
+Step 2: Clone the repository
+----------------------------
+
+.. code-block:: bash
+
+      git clone https://github.com/jsaussereau/AsteRISC.git
+      cd AsteRISC/
+      git submodule update --init --recursive
+
+Install the environment
+=======================
 
 Step 1: Install Python 3.6+ and make
 ------------------------------------
@@ -69,22 +69,13 @@ Step 1: Install Python 3.6+ and make
          sudo pacman -Syu
          sudo pacman -S python3 make --noconfirm
 
-Step 2: Configure a virtual environment [*Optional*]
+
+Step 2: Install the Odatix based virtual environment
 ----------------------------------------------------
 
 .. code-block:: bash
 
-   # Create a virtual environment
-   python3 -m venv odatix_venv
-   # Activate the virtual environment
-   source odatix_venv/bin/activate # You have to run this command at every new shell session
-
-Step 3: Install the package
-----------------------------
-
-.. code-block:: bash
-
-   python3 -m pip install odatix
+   source install.sh
 
 
 Install EDA tools
