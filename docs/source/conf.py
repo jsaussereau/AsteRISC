@@ -17,6 +17,7 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.autosummary',
     'sphinx.ext.intersphinx',
+    "sphinx_copybutton",
     'sphinx_tabs.tabs',
 #    'sphinx_inline_tabs',
 ]
