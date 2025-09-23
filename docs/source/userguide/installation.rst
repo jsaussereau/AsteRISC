@@ -40,6 +40,13 @@ Step 2: Clone the repository
       cd AsteRISC/
       git submodule update --init --recursive
 
+Later updates can be done with:
+
+.. code-block:: bash
+
+      git pull --recurse-submodules
+      git submodule update --init --recursive
+
 Install the environment
 =======================
 
