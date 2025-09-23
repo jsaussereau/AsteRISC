@@ -29,30 +29,61 @@ Edit ``AsteRISC-firmware/riscv-env`` to set the path to your RISC-V toolchain in
 
 For instance:
 
-.. code-block:: bash
-   :linenos:
-   :lineno-start: 7
+.. tabs::
 
-   # RISC-V toolchain install path
-   RISCV_DIR=/opt/riscv32
+   .. group-tab:: 32 bits toolchain
 
-   # Target triple <machine>-<vendor>-<os>
-   RISCV_TT=riscv32-unknown-elf
+      .. code-block:: bash
+         :linenos:
+         :lineno-start: 7
 
-   # Binary folder for gcc, as, ld, etc.
-   RISCV_BIN=${RISCV_DIR}/bin
+         # RISC-V toolchain install path
+         RISCV_DIR=/opt/riscv
 
-   # .a library folder for libc, etc
-   RISCV_LIB=${RISCV_DIR}/${RISCV_TT}/lib
+         # Target triple <machine>-<vendor>-<os>
+         RISCV_TT=riscv32-unknown-elf
 
-   # .h include folder for libc, etc
-   RISCV_INC=${RISCV_DIR}/${RISCV_TT}/include
+         # Binary folder for gcc, as, ld, etc.
+         RISCV_BIN=${RISCV_DIR}/bin
 
-   # GCC library to use
-   RISCV_GCC_LIB=rv32i/ilp32
+         # .a library folder for libc, etc
+         RISCV_LIB=${RISCV_DIR}/${RISCV_TT}/lib
 
-   # Python3 command
-   PYTHON3=python3
+         # .h include folder for libc, etc
+         RISCV_INC=${RISCV_DIR}/${RISCV_TT}/include
+
+         # GCC library to use
+         RISCV_GCC_LIB=rv32i/ilp32
+
+         # Python3 command
+         PYTHON3=python3
+
+   .. group-tab:: 32 bits + 64 bits toolchain
+
+      .. code-block:: bash
+         :linenos:
+         :lineno-start: 7
+
+         # RISC-V toolchain install path
+         RISCV_DIR=/opt/riscv-gnu-toolchain/build/multilib
+
+         # Target triple <machine>-<vendor>-<os>
+         RISCV_TT=riscv64-unknown-elf
+
+         # Binary folder for gcc, as, ld, etc.
+         RISCV_BIN=${RISCV_DIR}/bin
+
+         # .a library folder for libc, etc
+         RISCV_LIB=${RISCV_DIR}/${RISCV_TT}/lib/rv32i/ilp32
+
+         # .h include folder for libc, etc
+         RISCV_INC=${RISCV_DIR}/${RISCV_TT}/include
+
+         # GCC library to use
+         RISCV_GCC_LIB=rv32i/ilp32
+
+         # Python3 command
+         PYTHON3=python3
 
 Step 3: Compile examples
 ~~~~~~~~~~~~~~~~~~~~~~~~
