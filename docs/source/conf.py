@@ -3,7 +3,7 @@
 # -- Project information
 
 project = 'AsteRISC'
-copyright = '2022-2024, Jonathan Saussereau'
+copyright = '2022-2025, Jonathan Saussereau'
 author = 'Jonathan Saussereau'
 
 #release = '0.1'
