@@ -1,0 +1,37 @@
+metrics:
+  Number_Of_Runs:
+    type: regex
+    settings:
+      file: log/print.log
+      pattern: 'Number_Of_Runs: (\d*)'
+      group_id: 1
+  Cycles_Per_Instruction:
+    type: regex
+    settings:
+      file: log/print.log
+      pattern: 'Cycles_Per_Instruction: (\d*)'
+      group_id: 1
+  Dhrystones_Per_Second_Per_MHz:
+    type: regex
+    settings:
+      file: log/print.log
+      pattern: 'Dhrystones_Per_Second_Per_MHz: (\d*)'
+      group_id: 1
+  DMIPS_Per_MHz:
+    type: regex
+    settings:
+      file: log/print.log
+      pattern: 'DMIPS_Per_MHz: ([0-9.]*)'
+      group_id: 1
+  Cycles:
+    type: regex
+    settings:
+      file: log/print.log
+      pattern: 'User_Time: (\d*) cycles, (\d*) insn'
+      group_id: 1
+  Insn:
+    type: regex
+    settings:
+      file: log/print.log
+      pattern: 'User_Time: (\d*) cycles, (\d*) insn'
+      group_id: 2

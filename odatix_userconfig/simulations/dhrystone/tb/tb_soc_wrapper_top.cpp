@@ -262,7 +262,7 @@ int main(int argc, char** argv) {
     // Check if the file stream is valid
     if (output_file_stream == NULL) {
         // Handle error if file cannot be opened
-        printf("error: Unable to open file \"%s\" for writing.\n", cpu_log_file_path);
+        printf("error: Unable to open file \"%s\" for writing.\n", cpu_log_file_path.c_str());
         exit(1);
     }
 
@@ -275,7 +275,7 @@ int main(int argc, char** argv) {
         // Check if the file stream is valid
         if (print_save_file_stream == NULL) {
             // Handle error if file cannot be opened
-            printf("error: Unable to open file \"%s\" for writing.\n", debug_print_file_path);
+            printf("error: Unable to open file \"%s\" for writing.\n", debug_print_file_path.c_str());
             exit(1);
         }
     }
@@ -302,7 +302,7 @@ int main(int argc, char** argv) {
             // print execution log
             if (CPU->get_instret() != 0 && CPU->get_instret() != last_instret) {
                 last_instret = CPU->get_instret();
-                fprintf(output_file_stream, "%0d) pc 0x%08x:\n ", CPU->get_instret(), CPU->get_pc());
+                fprintf(output_file_stream, "%0llu) pc 0x%08x:\n ", (unsigned long long)CPU->get_instret(), CPU->get_pc());
                 fprintf(output_file_stream, " instr: 0x%08x > %s\n", CPU->get_instr_code(), CPU->get_instr_name().c_str());
                 if (CPU->get_br_taken()) {
                     fprintf(output_file_stream, "  -> branch taken\n");

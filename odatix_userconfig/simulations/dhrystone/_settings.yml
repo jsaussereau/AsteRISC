@@ -1,18 +1,17 @@
-
-##############################################
-# Settings for counter testbench
-##############################################
----
-
-# delimiters for parameter files
-param_target_file: rtl/soc/soc_wrapper_top.sv
-use_parameters: Yes
-start_delimiter: "  // <main>"
-stop_delimiter: "  // </main>"
-
-# override part of the parameters
-override_parameters: Yes
-override_param_target_file: "rtl/soc/soc_wrapper_top.sv"
-override_param_file: "benchmark_params.txt"
-override_start_delimiter: "  // <sim_override> ------------------"
-override_stop_delimiter: "  // </sim_override> ------------------"
+architectures:
+- AsteRISC:
+    param_domains:
+      __main__:
+        param_file: benchmark_params.txt
+        combine: both
+        param_target_file: rtl/soc/soc_wrapper_top.sv
+        start_delimiter: // <sim_override>
+        stop_delimiter: \n  // </sim_override>
+      Mul:
+        param_dir: sim_params/rv32im_dhrystone
+        combine: both
+invariant_domains:
+  MEM:
+progress:
+  file: log/progress/log
+  regex: '(.*): ([0-9]+)%(.*)'
