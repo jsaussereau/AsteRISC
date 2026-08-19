@@ -1,0 +1,12 @@
+architectures:
+- AsteRISC:
+    param_domains:
+      __main__:
+        param_dir: sim_params/tb_cpu
+        param_file: sim_params/tb_cpu/default.txt
+        combine: both
+invariant_domains:
+  MEM:
+progress:
+  file: log/progress/log
+  regex: '(.*): ([0-9]+)%(.*)'

@@ -1,0 +1,41 @@
+metrics:
+  Tests_Total:
+    type: yaml
+    settings:
+      file: log/tests_results.yml
+      key: 'Tests_Total'
+  Tests_Passed:
+    type: yaml
+    settings:
+      file: log/tests_results.yml
+      key: 'Tests_Passed'
+  Tests_Failed:
+    type: yaml
+    settings:
+      file: log/tests_results.yml
+      key: 'Tests_Failed'
+  Tests_Not_Run:
+    type: yaml
+    settings:
+      file: log/tests_results.yml
+      key: 'Tests_Not_Run'
+  Pass_Rate:
+    type: yaml
+    settings:
+      file: log/tests_results.yml
+      key: 'Pass_Rate'
+  All_Tests_Passed:
+    type: yaml
+    settings:
+      file: log/tests_results.yml
+      key: 'All_Tests_Passed'
+  Failed_Tests:
+    type: yaml
+    settings:
+      file: log/tests_results.yml
+      key: 'Failed_Tests'
+  Not_Run_Tests:
+    type: yaml
+    settings:
+      file: log/tests_results.yml
+      key: 'Not_Run_Tests'
