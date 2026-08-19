@@ -1,3 +1,0 @@
-
- parameter p_imem_depth_pw2  = 9,
- parameter p_dmem_depth_pw2  = 11,
