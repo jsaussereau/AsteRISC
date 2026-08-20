@@ -74,6 +74,15 @@ SIM_LOGFILE = $(LOG_DIR)/sim.log
 PRINT_FILE = $(LOG_DIR)/print.log
 TESTS_RESULT_FILE = $(LOG_DIR)/tests_results.yml
 
+# progress file read by Odatix (regex: '(.*): ([0-9]+)%(.*)')
+PROGRESS_DIR = $(LOG_DIR)/progress
+PROGRESS_FILE = $(PROGRESS_DIR)/log
+
+# usage: $(call progress,<step name>,<percentage>)
+define progress
+mkdir -p $(PROGRESS_DIR); printf "%s: %s%%\n" "$(1)" "$(2)" > $(PROGRESS_FILE)
+endef
+
 # RTL source files
 EXCLUDE_PREFIX = tb_
 RTL_FILES := $(shell cd $(RTL_DIR); find . -name '*.sv' -not -name '$(EXCLUDE_PREFIX)*')
@@ -151,8 +160,10 @@ $(VCD_FILE): $(SIM_FILE)
 	@printf "              Simulating              \n"
 	@printf "######################################\n"
 	@printf "$(_END)\n"
+	@$(call progress,Simulating,50)
 	@$(SIM_FILE) --imem_file "$(IMEM_FILE)" --dmem_file "$(DMEM_FILE)" --imem_depth $(IMEM_DEPTH) --dmem_depth $(DMEM_DEPTH) --vcd_file "$(VCD_FILE)" --print --print_save $(PRINT_FILE) \
 	| tee "$(SIM_LOGFILE)" | sed "$(VERILATOR_COLOR)"
+	@$(call progress,Done,100)
 #	+verilator+rand+reset+2 
 	@printf "\n$(_BOLD)$(_CYAN)"
 	@printf "######################################\n"
@@ -167,6 +178,7 @@ $(SIM_FILE): .stamp.verilate
 	@printf "         Building Simulation          \n"
 	@printf "######################################\n"
 	@printf "$(_END)"
+	@$(call progress,Building simulation,10)
 	@python3 $(INCLUDE_ALL_SCRIPT)
 	@make -C $(OBJ_DIR) -f V$(MODULE).mk V$(MODULE) MAKEFLAGS=s --no-print-directory
 
@@ -180,6 +192,7 @@ verilate: .stamp.verilate
 	@printf "              Verilating              \n"
 	@printf "######################################\n"
 	@printf "$(_END)\n"
+	@$(call progress,Verilating,5)
 	@$(ENV_SET) cd $(RTL_DIR); verilator -Mdir $(OBJ_DIR) --top-module $(MODULE) $(VERILATOR_FLAGS) -cc $(RTL_FILES) --exe $(CPP_FILES) \
 	2>&1 | tee "$(LOG_DIR)/$(VERILATOR_LOGFILE)" | sed "$(VERILATOR_COLOR)"
 	@touch .stamp.verilate
@@ -206,3 +219,5 @@ makedir:
 	@mkdir -p $(OBJ_DIR)
 	@mkdir -p $(LOG_DIR)
 	@mkdir -p $(VCD_DIR)
+	@mkdir -p $(PROGRESS_DIR)
+	@$(call progress,Starting,0)
