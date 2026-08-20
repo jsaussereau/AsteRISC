@@ -1,11 +1,11 @@
 
   parameter p_pipeline        = 1,
 
-  // pipeline settings:
+  // pipeline settings: 6 barriers in total
   parameter p_stage_IF        = 1,
   parameter p_stage_IC        = 0,
-  parameter p_stage_ID        = 0,
-  parameter p_stage_RF        = 1,
+  parameter p_stage_ID        = 2,
+  parameter p_stage_RF        = 0,
   parameter p_stage_EX        = 1,
   parameter p_stage_MA        = 1,
   parameter p_stage_WB        = 1,
