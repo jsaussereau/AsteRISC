@@ -1,0 +1,17 @@
+metrics:
+  Total_Ticks:
+    type: regex
+    settings:
+      file: log/print.log
+      pattern: 'Total ticks\s*:\s*(\d+)'
+      group_id: 1
+  Iterations:
+    type: regex
+    settings:
+      file: log/print.log
+      pattern: 'Iterations\s*:\s*(\d+)'
+      group_id: 1
+  CoreMark_Per_MHz:
+    type: operation
+    settings:
+      op: float(Iterations)*1e6/float(Total_Ticks)

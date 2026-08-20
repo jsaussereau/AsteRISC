@@ -1,0 +1,45 @@
+architectures:
+- AsteRISC:
+    param_domains:
+      __main__:
+      - param_file: benchmark_params.txt
+        combine: both
+        param_target_file: rtl/soc/soc_wrapper_top.sv
+        start_delimiter: // <sim_override>
+        stop_delimiter: \n  // </sim_override>
+      - param_dir: sim_params/tb_cpu
+        param_file: sim_params/tb_cpu/multi-cycle.txt
+      Mul:
+        param_dir: sim_params/rv32im_coremark
+        combine: both
+- AsteRISC-M:
+    param_domains:
+      __main__:
+      - param_file: benchmark_params.txt
+        combine: both
+        param_target_file: rtl/soc/soc_wrapper_top.sv
+        start_delimiter: // <sim_override>
+        stop_delimiter: \n  // </sim_override>
+      - param_dir: sim_params/tb_cpu
+        param_file: sim_params/tb_cpu/multi-cycle.txt
+      Mul:
+        param_dir: sim_params/rv32im_coremark
+        combine: both
+- AsteRISC-P:
+    param_domains:
+      __main__:
+      - param_file: benchmark_params.txt
+        combine: both
+        param_target_file: rtl/soc/soc_wrapper_top.sv
+        start_delimiter: // <sim_override>
+        stop_delimiter: \n  // </sim_override>
+      - param_dir: sim_params/tb_cpu
+        param_file: sim_params/tb_cpu/multi-cycle.txt
+      Mul:
+        param_dir: sim_params/rv32im_coremark
+        combine: both
+invariant_domains:
+  MEM:
+progress:
+  file: log/progress/log
+  regex: '(.*): ([0-9]+)%(.*)'
