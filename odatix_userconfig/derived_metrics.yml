@@ -1,0 +1,18 @@
+groups: {}
+derived_metrics:
+  DMIPS_Per_MHz:
+    type: import
+    from: simulation
+    optional: true
+  DMIPS:
+    type: operation
+    op: float(DMIPS_Per_MHz)*meta.frequency
+    unit: DMIPS
+  CoreMark_Per_MHz:
+    type: import
+    from: simulation
+    optional: true
+  CoreMark:
+    type: operation
+    op: float(CoreMark_Per_MHz)*meta.frequency
+    unit: CoreMark
