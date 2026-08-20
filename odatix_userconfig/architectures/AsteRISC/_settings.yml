@@ -24,17 +24,8 @@ configurations:
     p_rf_sp           = $p_rf_sp,\n  parameter p_rf_read_buf     = $p_rf_read_buf,\n\
     \  parameter p_branch_buf      = $p_branch_buf,\n  parameter p_mem_buf       \
     \  = $p_mem_buf,\n  parameter p_wb_buf          = $p_wb_buf,"
-  blacklist: [M0002, M0004, M0005, M0006, M0007, M0010, M0011, M0012, M0013, 
-      M0014, M0015, M0017, M0018, M0019, M0020, M0021, M0022, M0023, M0026, 
-      M0028, M0029, M0030, M0031, M0032, M0033, M0034, M0035, M0038, M0040, 
-      M0041, M0042, M0043, M0045, M0046, M0047, M0048, M0049, M0050, M0051, 
-      M0053, M0054, M0055, M0056, M0057, M0058, M0059, M0062, M0064, M0065, 
-      M0066, M0067, M0068, M0070, M0071, M0072, M0073, M0074, M0075, M0076, 
-      M0077, M0078, M0080, M0081, M0082, M0083, M0084, M0085, M0086, M0087, 
-      M0088, M0089, M0090, M0091, M0092, M0093, M0094, M0095, M0096, M0097, 
-      M0098, M0099, M0102, M0104, M0105, M0106, M0107, M0110, M0112, M0113, 
-      M0114, M0115, M0116, M0117, M0118, M0120, M0121, M0122, M0123, M0124, 
-      M0125, M0126, M0127]
+  constraints:
+  - ${p_rf_sp} <= ${p_rf_read_buf}
 
 fmax_synthesis:
   lower_bound: 50
