@@ -281,8 +281,6 @@ int main(int argc, char** argv) {
     }
 
     std::cout << _BOLD << "Software Print Log: " << _END << std::endl << "  ";
-    uint64_t last_instret = 2;
-
     for (int time = 0; time < 1000000; ++time) {
         top->i_xtal_p = !top->i_xtal_p;
 
@@ -300,8 +298,7 @@ int main(int argc, char** argv) {
         if (time%2 == 0 && !top->i_xrst) {
 
             // print execution log
-            if (CPU->get_instret() != 0 && CPU->get_instret() != last_instret) {
-                last_instret = CPU->get_instret();
+            if (CPU->get_valid()) {
                 fprintf(output_file_stream, "%0llu) pc 0x%08x:\n ", (unsigned long long)CPU->get_instret(), CPU->get_pc());
                 fprintf(output_file_stream, " instr: 0x%08x > %s\n", CPU->get_instr_code(), CPU->get_instr_name().c_str());
                 if (CPU->get_br_taken()) {
