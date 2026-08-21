@@ -1,0 +1,5 @@
+  
+  parameter p_branch_pred     = 2,            //! dynamic prediction: the classical 256 x 2 bit bimodal table
+  parameter p_bp_index_bits   = 8,            //! 256 counters
+  parameter p_bp_ctr_bits     = 2,            //! 2 bit saturating counters
+  parameter p_bp_ghr_bits     = 0,            //! no global history (bimodal)

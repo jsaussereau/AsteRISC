@@ -1,0 +1,5 @@
+  
+  parameter p_branch_pred     = 2,            //! dynamic prediction: 16 x 1 bit, 16 flip-flops in total
+  parameter p_bp_index_bits   = 4,            //! 16 counters
+  parameter p_bp_ctr_bits     = 1,            //! last outcome only, no hysteresis
+  parameter p_bp_ghr_bits     = 0,            //! no global history (bimodal)

@@ -1,0 +1,2 @@
+  
+  parameter p_ext_rve         = 1,            //! use RV32E extension (reduces the integer register count to 16)

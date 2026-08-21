@@ -1,0 +1,5 @@
+  
+  parameter p_branch_pred     = 1,            //! static prediction: backward taken / forward not taken
+  parameter p_bp_index_bits   = 5,            //! dynamic prediction: unused here
+  parameter p_bp_ctr_bits     = 2,            //! dynamic prediction: unused here
+  parameter p_bp_ghr_bits     = 0,            //! dynamic prediction: unused here

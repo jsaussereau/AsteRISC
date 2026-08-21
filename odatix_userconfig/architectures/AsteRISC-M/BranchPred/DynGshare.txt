@@ -1,0 +1,5 @@
+  
+  parameter p_branch_pred     = 2,            //! dynamic prediction: 512 x 2 bit gshare, 9 bits of global history
+  parameter p_bp_index_bits   = 9,            //! 512 counters
+  parameter p_bp_ctr_bits     = 2,            //! 2 bit saturating counters
+  parameter p_bp_ghr_bits     = 9,            //! 9 bits of global history (gshare)
