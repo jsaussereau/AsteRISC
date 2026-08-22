@@ -40,14 +40,16 @@ ENV_SET = export LC_ALL=C; unset LANGUAGE;
 
 INCLUDE_ALL_SCRIPT  = $(WORK_DIR)/include_all.py
 
-#RV_TEST_IMEM_FILE   = $(ASTERISC_DIR)/AsteRISC-firmware/hex/Tests_RV32I/tests_imem.hex
-#RV_TEST_DMEM_FILE   = $(ASTERISC_DIR)/AsteRISC-firmware/hex/Tests_RV32I/tests_dmem.hex
 # RV32I build: used when the core has no M extension (Mul_Off)
-COREMARK_IMEM_FILE   = $(ASTERISC_DIR)/AsteRISC-firmware/firmware/benchmarks/coremark/bin/coremark_benchmark_imem.hex
-COREMARK_DMEM_FILE   = $(ASTERISC_DIR)/AsteRISC-firmware/firmware/benchmarks/coremark/bin/coremark_benchmark_dmem.hex
+# COREMARK_IMEM_FILE   = $(ASTERISC_DIR)/AsteRISC-firmware/firmware/benchmarks/coremark/bin/coremark_benchmark_imem.hex
+# COREMARK_DMEM_FILE   = $(ASTERISC_DIR)/AsteRISC-firmware/firmware/benchmarks/coremark/bin/coremark_benchmark_dmem.hex
+COREMARK_IMEM_FILE   = $(ASTERISC_DIR)/AsteRISC-firmware/hex/Coremark_RV32I/coremark_benchmark_imem.hex
+COREMARK_DMEM_FILE   = $(ASTERISC_DIR)/AsteRISC-firmware/hex/Coremark_RV32I/coremark_benchmark_dmem.hex
 # RV32IM build: used when the core has the M extension (Mul_Basic/Fast/Single_cycle)
-COREMARK_M_IMEM_FILE = $(ASTERISC_DIR)/AsteRISC-firmware/firmware/benchmarks/coremark_m/bin/coremark_benchmark_imem.hex
-COREMARK_M_DMEM_FILE = $(ASTERISC_DIR)/AsteRISC-firmware/firmware/benchmarks/coremark_m/bin/coremark_benchmark_dmem.hex
+# COREMARK_M_IMEM_FILE = $(ASTERISC_DIR)/AsteRISC-firmware/firmware/benchmarks/coremark_m/bin/coremark_benchmark_imem.hex
+# COREMARK_M_DMEM_FILE = $(ASTERISC_DIR)/AsteRISC-firmware/firmware/benchmarks/coremark_m/bin/coremark_benchmark_dmem.hex
+COREMARK_M_IMEM_FILE   = $(ASTERISC_DIR)/AsteRISC-firmware/hex/Coremark_RV32IM/coremark_benchmark_imem.hex
+COREMARK_M_DMEM_FILE   = $(ASTERISC_DIR)/AsteRISC-firmware/hex/Coremark_RV32IM/coremark_benchmark_dmem.hex
 
 ########################################################
 # Simulation Parameters
