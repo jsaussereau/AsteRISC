@@ -1,0 +1,46 @@
+
+###########################################
+# Parameter Domain - Overlap              #
+###########################################
+#
+# Multi-cycle core only. Where the instruction memory latency is hidden.
+#
+# Without overlap the instruction bus request is registered, so an instruction
+# word requested during `st_execute` only lands two cycles later: `st_write_back`
+# exists to stand in that shadow, and the straight line loop
+# `st_execute -> st_write_back -> st_execute` costs 2 cycles per instruction. No
+# combination of `p_*_buf` can go below that floor -- they only add states.
+#
+# With overlap the request is driven combinationally, the word lands the very
+# next cycle, and the write back merges into the execute state. The straight
+# line loop becomes `st_execute -> st_execute`, CPI 1. Loads keep their 3 cycles
+# because they hold the data bus, and stores keep 2.
+#
+# The price is not area, it is the critical path: the whole
+# `imem read data -> decompress -> decode -> next pc` chain moves in front of the
+# instruction memory address input. So this is a pure IPC for Fmax trade, and
+# whether it lands on the Pareto frontier is exactly what the sweep answers.
+#
+#   Off : registered request, write back state kept   (reference)
+#   On  : combinational request, write back merged
+#
+# Legal on the eight M configurations where the front-end and branch buffers are
+# off and the register file is dual port:
+#   p_fetch_buf = p_decode_buf = p_branch_buf = p_rf_sp = 0
+# i.e. M0000, M0001, M0004, M0005, M0008, M0009, M0012, M0013.
+#
+# `p_wb_buf` and `p_rf_read_buf` are free because `cpu_regfile` carries a
+# depth-1 bypass (`p_bypass`, enabled by `cpu_core` whenever `p_overlap` and
+# `p_wb_buf` are both set) that forwards the pending write back to the read
+# ports. `p_wb_buf` is then free in cycles too -- it used to cost a whole
+# `st_write_back_buf` state -- while still shortening the critical path, which
+# makes it a genuinely attractive point here rather than a mere variant.
+#
+# What remains excluded is not a data hazard: `p_rf_sp` is a structural conflict
+# (one port cannot serve the merged write and the next read at once), and
+# `p_fetch_buf` / `p_decode_buf` / `p_branch_buf` are sequencing problems -- the
+# extra state no longer falls in front of the cycle that consumes it. `cpu_core`
+# asserts on each of them. See EXCLUSIONS.md.
+
+start_delimiter: "  // <overlap>"
+stop_delimiter: "  // </overlap>"

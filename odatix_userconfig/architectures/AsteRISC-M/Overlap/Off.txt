@@ -1,0 +1,2 @@
+  
+  parameter p_overlap         = 0,            //! registered imem request, write back state kept

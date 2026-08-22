@@ -1,0 +1,44 @@
+
+###########################################
+# Parameter Domain - ALU                  #
+###########################################
+#
+# What stands *between* two register barriers, as opposed to `p_stage_*` and
+# `p_*_buf` which decide where the barriers are. Both knobs move the critical
+# path; only the shifter also moves the cycle count.
+#
+#   p_alu_share_adder : 0 = one dedicated operator per comparison and for `sub`
+#                       1 = `sub`, `slt`, `sltu` and the three branch
+#                           comparators all read a single two's complement adder
+#   p_alu_shift_bits  : bits shifted per cycle. 32 = the barrel shifter (five
+#                       mux layers, one cycle). 1/2/4/8/16 = a sequential
+#                       shifter of log2(K)+1 layers, costing up to 31/K extra
+#                       cycles, on shift instructions only.
+#
+# Configuration names read "Sh<K>_SA<0|1>": `Sh32_SA0` is the reference design.
+
+start_delimiter: "  // <alu>"
+stop_delimiter: "  // </alu>"
+
+# Configurations
+configurations:
+  name: "Sh${shift_bits}_SA${p_alu_share_adder}"
+  template: |2
+
+    parameter p_alu_share_adder = $p_alu_share_adder,
+    parameter p_alu_shift_bits  = $shift_bits,
+
+variables:
+  p_alu_share_adder:
+    type: bool
+    settings: {}
+  shift_exp:
+    type: range
+    settings:
+      from: 0
+      to: 5
+      step: 1
+  shift_bits:
+    type: function
+    settings:
+      op: 2^$shift_exp

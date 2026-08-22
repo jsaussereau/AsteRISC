@@ -1,0 +1,54 @@
+###########################################
+# Parameter Domain - Fwd                  #
+###########################################
+#
+# Pipelined core only: which in-flight register writes may be bypassed towards
+# the ALU operands. The multi-cycle architecture ignores every parameter of
+# this domain, which is why `AsteRISC-M` does not carry it.
+#
+#   p_fwd_ex/ma/wb : bypass from the EX / MA / WB barriers
+#   p_fwd_pw       : bypass from the pending register file write (this entry
+#                    only exists when `p_stage_RF != 0`)
+#
+# Clearing a `p_fwd_*` does not break anything -- the read-after-write is still
+# detected, it just becomes a stall instead of a bypass -- it narrows the mux
+# sitting in front of the ALU operands at the cost of CPI.
+#
+# Configuration names read "F<ex><ma><wb><pw>", so the reference design is
+# `F1111`.
+
+start_delimiter: "  // <fwd>"
+stop_delimiter: "  // </fwd>"
+
+# Configurations
+configurations:
+  name: "EX${p_fwd_ex}MA${p_fwd_ma}WB${p_fwd_wb}PW${p_fwd_pw}"
+  template: |2
+
+    parameter p_fwd_ex          = $p_fwd_ex,
+    parameter p_fwd_ma          = $p_fwd_ma,
+    parameter p_fwd_wb          = $p_fwd_wb,
+    parameter p_fwd_pw          = $p_fwd_pw,
+  constraints:
+  # The forwarding entries are a single youngest-first mux: every entry costs
+  # the same one mux input, but the younger it is, the more frequent the hazard
+  # it covers. Dropping a young entry while keeping an older one is therefore
+  # dominated -- same path, strictly more stalls -- so only the prefixes of the
+  # list are explored.
+  - ${p_fwd_ex} >= ${p_fwd_ma}
+  - ${p_fwd_ma} >= ${p_fwd_wb}
+  - ${p_fwd_wb} >= ${p_fwd_pw}
+
+variables:
+  p_fwd_ex:
+    type: bool
+    settings: {}
+  p_fwd_ma:
+    type: bool
+    settings: {}
+  p_fwd_wb:
+    type: bool
+    settings: {}
+  p_fwd_pw:
+    type: bool
+    settings: {}

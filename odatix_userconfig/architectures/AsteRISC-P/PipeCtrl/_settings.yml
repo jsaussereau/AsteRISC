@@ -1,0 +1,42 @@
+###########################################
+# Parameter Domain - PipeCtrl             #
+###########################################
+#
+# Pipelined core only: where a control transfer is acted upon. The multi-cycle
+# architecture ignores every parameter of this domain, which is why
+# `AsteRISC-M` does not carry it. The bypass network is a domain of its own,
+# `Fwd`.
+#
+#   p_early_jal    : resolve `jal` from the decoder (IC slot) instead of the RF
+#                    slot -- its target needs no register value
+#   p_redirect_buf : register the redirection target before the fetch stage
+#                    (one more cycle of redirection shadow, shorter path)
+#   p_branch_stage : slot at which a resolved transfer is acted upon
+#                    0 = RF (default), 1 = EX (one extra bubble, takes the
+#                    redirection fan-out off the RF critical path)
+#
+# Configuration names read "EJ<x>RB<x>BS<x>", so the reference design is
+# `EJ1RB1BS0`.
+
+start_delimiter: "  // <pipe_ctrl>"
+stop_delimiter: "  // </pipe_ctrl>"
+
+# Configurations
+configurations:
+  name: "EJ${p_early_jal}RB${p_redirect_buf}BS${p_branch_stage}"
+  template: |2
+
+    parameter p_early_jal       = $p_early_jal,
+    parameter p_redirect_buf    = $p_redirect_buf,
+    parameter p_branch_stage    = $p_branch_stage,
+
+variables:
+  p_early_jal:
+    type: bool
+    settings: {}
+  p_redirect_buf:
+    type: bool
+    settings: {}
+  p_branch_stage:
+    type: bool
+    settings: {}
