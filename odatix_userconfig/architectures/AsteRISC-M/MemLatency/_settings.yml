@@ -1,0 +1,31 @@
+
+###########################################
+# Parameter Domain - MemLatency           #
+###########################################
+#
+# What the memories cost to reach.
+#
+# `soc_sp_ram` answers in one cycle and never raises `busy`, and in front of
+# such a memory a cache can only ever be neutral or worse: there is nothing to
+# amortise, so every point of the `Cache` domain gives the same answer. This
+# domain is what gives the memory a price, and therefore what makes the `Cache`
+# axes measurable at all. The two are meant to be swept together.
+#
+# A read landing on the word right after the previous access is taken to
+# continue a burst and pays the burst latency instead of the read latency --
+# exactly the access pattern of a line refill, and of nothing else in this SoC.
+# So the two numbers together say what shape of memory is behind:
+#
+#   SRAM1     the one cycle SRAM the SoC has always had, and no logic at all
+#   Slow4     a slow SRAM: short opening, and it streams
+#   Flash8    a serial flash or an SDRAM: long opening, then it streams
+#   Flash16   the same, twice as far away
+#   Random8   as slow as Flash8 but with no burst at all, so a long line buys
+#             nothing -- this is the configuration that separates the line size
+#             axis from the size axis
+#
+# See `soc_mem_latency`. The domain applies to both cores, and is what the
+# `Cache` domain has to be swept against on either of them.
+
+start_delimiter: "  // <mem_latency>"
+stop_delimiter: "  // </mem_latency>"

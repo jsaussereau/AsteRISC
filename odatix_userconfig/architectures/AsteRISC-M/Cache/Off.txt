@@ -1,0 +1,14 @@
+  
+  parameter p_icache_en          = 0,        //! no instruction cache
+  parameter p_icache_size_pw2    = 9,        //! unused here
+  parameter p_icache_line_pw2    = 4,        //! unused here
+  parameter p_icache_ways        = 1,        //! unused here
+  parameter p_icache_repl        = 0,        //! unused here
+  parameter p_dcache_en          = 0,        //! no data cache
+  parameter p_dcache_size_pw2    = 9,        //! unused here
+  parameter p_dcache_line_pw2    = 4,        //! unused here
+  parameter p_dcache_ways        = 1,        //! unused here
+  parameter p_dcache_repl        = 0,        //! unused here
+  parameter p_dcache_write_back  = 0,        //! unused here
+  parameter p_dcache_write_alloc = 0,        //! unused here
+  parameter p_dcache_wbuf_depth  = 0,        //! unused here

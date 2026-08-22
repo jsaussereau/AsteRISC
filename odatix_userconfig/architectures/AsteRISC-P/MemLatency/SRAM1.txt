@@ -1,0 +1,6 @@
+  
+  parameter p_imem_rd_latency    = 0,        //! one cycle SRAM: no latency logic is instantiated
+  parameter p_imem_burst_latency = 0,        //! instruction read continuing a burst
+  parameter p_dmem_rd_latency    = 0,        //! random access data read
+  parameter p_dmem_burst_latency = 0,        //! data read continuing a burst
+  parameter p_dmem_wr_latency    = 0,        //! data write

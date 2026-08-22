@@ -1,0 +1,6 @@
+  
+  parameter p_imem_rd_latency    = 4,        //! random access instruction read
+  parameter p_imem_burst_latency = 1,        //! instruction read continuing a burst
+  parameter p_dmem_rd_latency    = 4,        //! random access data read
+  parameter p_dmem_burst_latency = 1,        //! data read continuing a burst
+  parameter p_dmem_wr_latency    = 1,        //! data write

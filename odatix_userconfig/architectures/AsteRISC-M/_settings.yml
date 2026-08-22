@@ -99,3 +99,100 @@ variables:
       source: ${value_bin}
     format: '%04d'
 match: {}
+
+###########################################
+# Exclusions                              #
+###########################################
+#
+# Combinations of the parameter domains that are not part of the design space,
+# written once here instead of being avoided by hand in every sweep line.
+# See EXCLUSIONS.md for the reasoning behind each of them.
+#
+# What a domain can say about its *own* combinations stays in its
+# `constraints:` -- `p_rf_sp <= p_rf_read_buf` above, the forwarding prefixes in
+# `AsteRISC-P/Fwd`. What follows is what crosses two domains.
+
+exclusions:
+
+# 2.7 -- Overlap x main
+#
+# `Overlap/On` merges the write back state into the execute state: the result of
+# instruction i must reach the register file before i+1 reads it. `p_wb_buf` and
+# `p_rf_read_buf` stay legal, covered by the depth-1 bypass of `cpu_regfile`;
+# what remains is a structural conflict and two sequencing problems, each of
+# them asserted by `cpu_core`.
+
+- id: overlap-single-port-rf
+  when: "$Overlap == 'On' and $p_rf_sp == 1"
+  kind: illegal
+  message: "a single port register file cannot serve the merged write of i and the read of i+1 in the same cycle"
+
+- id: overlap-front-end-buffers
+  when: "$Overlap == 'On' and ($p_fetch_buf == 1 or $p_decode_buf == 1)"
+  kind: illegal
+  message: "the instruction word lands one cycle earlier, so the buffer state no longer falls in front of the cycle that consumes it"
+
+- id: overlap-branch-buffer
+  when: "$Overlap == 'On' and $p_branch_buf == 1"
+  kind: illegal
+  message: "speculation resolves in st_execute_buf, which does not reissue the request once it has become combinational"
+
+# 2.9 -- Cache x MemLatency
+#
+# In front of a memory that answers in one cycle and never says busy, a cache
+# has nothing to amortise: at best it hits every time and costs exactly what the
+# memory cost, at worst it misses and costs more. Every point of the `Cache`
+# domain gives the same cycle count there, and pays area and critical path for
+# it. Dominated rather than illegal -- it builds, it runs, and it is the right
+# thing to run if what is being measured is what a cache costs rather than what
+# it buys.
+
+- id: cache-in-front-of-one-cycle-sram
+  when: "$Cache != 'Off' and $MemLatency == 'SRAM1'"
+  kind: dominated
+  message: "a cache in front of a one cycle SRAM can only be neutral or worse: there is no memory latency to amortise"
+
+# 2.10 -- Cache x MEM
+#
+# `soc_cache` takes its tag width from the depth of the memory behind it, so a
+# cache as large as that memory leaves no tag to compare, and one larger than it
+# is not a design point at all. `soc_cache` asserts on it; the two rules below
+# say the same thing ahead of time, so a sweep does not have to discover it one
+# job at a time.
+#
+# `MEM` counts 32 bit words, so a memory of `depth` holds 2**(depth+2) bytes and
+# a cache of 2**n bytes needs `depth + 2 > n`. The instruction side and the data
+# side are separate because `MEM` sizes them separately.
+#
+# This is the constraint that says what these caches are for. Caching an on-chip
+# SRAM only means something when reaching it costs something, which is what the
+# `MemLatency` domain is there to say -- and the memory then has to be the large
+# and slow one, with the cache small in front of it.
+
+- id: icache-too-large-for-the-instruction-memory
+  when: "($Cache == 'I2K_1w_L16' or $Cache == 'I2K_2w_L32' or $Cache == 'I2K_2w_L32_D1K_1w_L16_WT_B4') and ($MEM.imem_depth + 2) <= 11"
+  kind: illegal
+  message: "a 2 kib instruction cache needs more than 2 kib of instruction memory behind it, or there is no tag left to compare"
+
+- id: icache-4k-too-large-for-the-instruction-memory
+  when: "($Cache == 'I4K_4w_L32' or $Cache == 'I4K_4w_L32_D4K_4w_L32_WB') and ($MEM.imem_depth + 2) <= 12"
+  kind: illegal
+  message: "a 4 kib instruction cache needs more than 4 kib of instruction memory behind it, or there is no tag left to compare"
+
+- id: dcache-too-large-for-the-data-memory
+  when: "($Cache == 'D1K_1w_L16_WT' or $Cache == 'D1K_1w_L16_WT_B4' or $Cache == 'D1K_1w_L16_WB' or $Cache == 'I2K_2w_L32_D1K_1w_L16_WT_B4') and ($MEM.dmem_depth + 2) <= 10"
+  kind: illegal
+  message: "a 1 kib data cache needs more than 1 kib of data memory behind it, or there is no tag left to compare"
+
+- id: dcache-4k-too-large-for-the-data-memory
+  when: "($Cache == 'D4K_4w_L32_WB' or $Cache == 'I4K_4w_L32_D4K_4w_L32_WB') and ($MEM.dmem_depth + 2) <= 12"
+  kind: illegal
+  message: "a 4 kib data cache needs more than 4 kib of data memory behind it, or there is no tag left to compare"
+
+# 2.3 -- ALU x Mul is *not* an exclusion: `cpu_alu` instantiates the shared
+# adder as soon as `p_ext_rvm` is set, so `p_alu_share_adder = 1` only costs a
+# mux there. The axis is only really discriminating with `Mul/Off`.
+#
+# 2.6 -- `Baseline/E` needs a firmware built for `-march=rv32e*`. That is a
+# property of the simulation, not of the design space, so it belongs to the
+# simulation that runs it.

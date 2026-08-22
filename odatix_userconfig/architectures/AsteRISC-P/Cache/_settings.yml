@@ -1,0 +1,42 @@
+
+###########################################
+# Parameter Domain - Cache                #
+###########################################
+#
+# What stands between the core and the two memories. `Off` is not "the caches
+# disabled": `soc_mem_port` instantiates nothing at all, so it is the SoC as it
+# was before caches existed, down to the netlist. Every result taken before this
+# domain existed is therefore comparable with `Off`.
+#
+# A hit costs exactly what the memory alone used to cost -- the tags are flip
+# flops read asynchronously, so the hit is known in the request cycle -- and
+# pays for it in the critical path, an address now going through a tag
+# comparison before it reaches the array. A miss holds the bus busy for the
+# refill. See `soc_cache` for the rest.
+#
+# The axes, and which end of the range each one reaches:
+#
+#   size    total data bytes. Tag, valid and dirty bits sit on top and are flip
+#           flops, so the small end of the range is dominated by them, not by
+#           the data.
+#   L<n>    line size in bytes, 8 to 64. Long lines amortise the memory opening
+#           latency over more words and shrink the tag array, and waste
+#           bandwidth as soon as the locality is not there.
+#   <n>w    associativity, 1, 2 or 4. Direct mapped needs neither a way mux nor
+#           replacement state; associativity buys back conflict misses and puts
+#           a mux behind the tag comparison.
+#   WT/WB   data side write policy. Write through sends every store to memory;
+#           write back only marks the line dirty and writes it out on eviction,
+#           costing a dirty bit per line and an eviction path. `B<n>` is the
+#           depth of the posted store buffer, write through only.
+#
+# The replacement policy is left at LRU here; it is only worth sweeping once the
+# associativity axis has shown where the conflict misses are.
+#
+# The domain applies to both cores. The multi-cycle core waits in the state that
+# issued the access; the pipelined core turns a busy bus into a fetch that
+# reports no word and an EX slot that cannot move on, which its elastic pipeline
+# turns into bubbles by itself. `Off` is bit-identical on both.
+
+start_delimiter: "  // <cache>"
+stop_delimiter: "  // </cache>"

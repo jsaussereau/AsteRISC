@@ -1,0 +1,14 @@
+  
+  parameter p_icache_en          = 1,        //! instruction cache: two way
+  parameter p_icache_size_pw2    = 11,        //! 2048 bytes
+  parameter p_icache_line_pw2    = 5,        //! 32 byte lines
+  parameter p_icache_ways        = 2,        //! 2 way
+  parameter p_icache_repl        = 0,        //! LRU
+  parameter p_dcache_en          = 1,        //! data cache: write through, 4 posted stores
+  parameter p_dcache_size_pw2    = 10,        //! 1024 bytes
+  parameter p_dcache_line_pw2    = 4,        //! 16 byte lines
+  parameter p_dcache_ways        = 1,        //! 1 way
+  parameter p_dcache_repl        = 0,        //! LRU
+  parameter p_dcache_write_back  = 0,        //! write through
+  parameter p_dcache_write_alloc = 0,        //! no write allocate
+  parameter p_dcache_wbuf_depth  = 4,        //! posted store buffer depth

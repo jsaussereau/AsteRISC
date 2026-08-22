@@ -36,3 +36,172 @@ ST28CMOSFDSOI:
   fmax_synthesis:
     lower_bound: 500
     upper_bound: 2000
+
+###########################################
+# Attributes                              #
+###########################################
+#
+# The pipeline topologies are written by hand, one file per topology, so a
+# configuration carries no variable an exclusion could read. What tells one
+# topology from another is exactly what the exclusions below need to know --
+# where the register barriers are -- so it is read off the name and off the
+# content of the file itself.
+#
+# The name says it: "P-IF1IC2ID1EX1MA1WB1" is one barrier after IF, two after
+# IC, and so on; a stage the name does not mention has no barrier at all, which
+# is what the defaults say. The content says it again, and has the last word.
+
+attributes:
+  defaults:
+    stage_IF: 0
+    stage_IC: 0
+    stage_ID: 0
+    stage_RF: 0
+    stage_EX: 0
+    stage_MA: 0
+    stage_WB: 0
+  from_name:
+  - "IF(?P<stage_IF>\\d+)"
+  - "IC(?P<stage_IC>\\d+)"
+  - "ID(?P<stage_ID>\\d+)"
+  - "RF(?P<stage_RF>\\d+)"
+  - "EX(?P<stage_EX>\\d+)"
+  - "MA(?P<stage_MA>\\d+)"
+  - "WB(?P<stage_WB>\\d+)"
+  from_content:
+  - "p_stage_IF\\s*=\\s*(?P<stage_IF>\\d+)"
+  - "p_stage_IC\\s*=\\s*(?P<stage_IC>\\d+)"
+  - "p_stage_ID\\s*=\\s*(?P<stage_ID>\\d+)"
+  - "p_stage_RF\\s*=\\s*(?P<stage_RF>\\d+)"
+  - "p_stage_EX\\s*=\\s*(?P<stage_EX>\\d+)"
+  - "p_stage_MA\\s*=\\s*(?P<stage_MA>\\d+)"
+  - "p_stage_WB\\s*=\\s*(?P<stage_WB>\\d+)"
+
+###########################################
+# Exclusions                              #
+###########################################
+#
+# Combinations of the parameter domains that are not part of the design space,
+# written once here instead of being avoided by hand in every sweep line.
+# See EXCLUSIONS.md for the reasoning behind each of them.
+#
+# `PipeCtrl` and `Fwd` describe what stands between barriers, so what they mean
+# depends on the topology `$config` is. A domain the run does not select is
+# unknown, and a rule reading it simply does not fire.
+
+exclusions:
+
+# 2.2 -- PipeCtrl x topology
+
+- id: branch-stage-without-ex-barrier
+  when: "$PipeCtrl.p_branch_stage == 1 and $config.stage_EX == 0"
+  kind: illegal
+  message: "cpu_hazard asserts: without an EX barrier the EX slot is the RF slot, there is no later slot to act upon a transfer in"
+
+- id: early-jal-without-decode-barrier
+  when: "$config.stage_ID == 0 and $config.stage_RF == 0 and $PipeCtrl.p_early_jal == 1"
+  require: "$PipeCtrl.p_early_jal == 0"
+  kind: duplicate
+  message: "the sel_br of the decoder and the one of the RF slot are the same signal here, so resolving early short-circuits no barrier"
+
+# 2.2 -- Fwd x topology
+#
+# A bypass entry that the topology does not create is a parameter the RTL
+# ignores: the design is the same hardware either way, so rather than being
+# dropped it is folded onto the configuration that leaves the entry out. Each
+# rule only fires on the pair of `Fwd` configurations that differ in that one
+# entry -- the prefix constraint of the domain rules out the others.
+
+- id: fwd-pw-and-wb-without-rf-and-wb-barriers
+  when: "$config.stage_RF == 0 and $config.stage_WB == 0 and ($Fwd.p_fwd_pw == 1 or $Fwd.p_fwd_wb == 1)"
+  require: "$Fwd.p_fwd_pw == 0 and $Fwd.p_fwd_wb == 0"
+  kind: duplicate
+  message: "N_FWD_PW = 0 without an RF barrier and N_FWD_WB = 0 without a WB barrier: neither entry exists"
+
+- id: fwd-pw-without-rf-barrier
+  when: "$config.stage_RF == 0 and $config.stage_WB != 0 and $Fwd.p_fwd_pw == 1"
+  require: "$Fwd.p_fwd_pw == 0"
+  kind: duplicate
+  message: "N_FWD_PW = 0 when p_stage_RF = 0: the pending write entry does not exist"
+
+- id: fwd-wb-without-wb-barrier
+  when: "$config.stage_WB == 0 and $config.stage_RF != 0 and $Fwd.p_fwd_pw == 0 and $Fwd.p_fwd_wb == 1"
+  require: "$Fwd.p_fwd_wb == 0"
+  kind: duplicate
+  message: "N_FWD_WB = 0 when p_stage_WB = 0: the write back entry does not exist"
+
+- id: fwd-ex-without-ex-barrier
+  when: "$config.stage_EX == 0 and $Fwd.p_fwd_ma == 0 and $Fwd.p_fwd_ex == 1"
+  require: "$Fwd.p_fwd_ex == 0"
+  kind: duplicate
+  message: "N_FWD_EX = p_stage_EX = 0: the execute entry does not exist"
+
+# 2.5 -- ALU x topology
+
+- id: sequential-shifter-with-deep-ex
+  when: "$ALU.shift_bits < 32 and $config.stage_EX >= 2"
+  kind: dominated
+  message: "the sequential shifter already holds the RF slot through exec_done; deepening EX to shorten a path it lengthens in cycles pays twice"
+
+# 2.9 -- Cache x MemLatency
+#
+# In front of a memory that answers in one cycle and never says busy, a cache
+# has nothing to amortise: at best it hits every time and costs exactly what the
+# memory cost, at worst it misses and costs more. Every point of the `Cache`
+# domain gives the same cycle count there, and pays area and critical path for
+# it. Dominated rather than illegal -- it builds, it runs, and it is the right
+# thing to run if what is being measured is what a cache costs rather than what
+# it buys.
+
+- id: cache-in-front-of-one-cycle-sram
+  when: "$Cache != 'Off' and $MemLatency == 'SRAM1'"
+  kind: dominated
+  message: "a cache in front of a one cycle SRAM can only be neutral or worse: there is no memory latency to amortise"
+
+# 2.10 -- Cache x MEM
+#
+# `soc_cache` takes its tag width from the depth of the memory behind it, so a
+# cache as large as that memory leaves no tag to compare, and one larger than it
+# is not a design point at all. `soc_cache` asserts on it; the two rules below
+# say the same thing ahead of time, so a sweep does not have to discover it one
+# job at a time.
+#
+# `MEM` counts 32 bit words, so a memory of `depth` holds 2**(depth+2) bytes and
+# a cache of 2**n bytes needs `depth + 2 > n`. The instruction side and the data
+# side are separate because `MEM` sizes them separately.
+#
+# This is the constraint that says what these caches are for. Caching an on-chip
+# SRAM only means something when reaching it costs something, which is what the
+# `MemLatency` domain is there to say -- and the memory then has to be the large
+# and slow one, with the cache small in front of it.
+
+- id: icache-too-large-for-the-instruction-memory
+  when: "($Cache == 'I2K_1w_L16' or $Cache == 'I2K_2w_L32' or $Cache == 'I2K_2w_L32_D1K_1w_L16_WT_B4') and ($MEM.imem_depth + 2) <= 11"
+  kind: illegal
+  message: "a 2 kib instruction cache needs more than 2 kib of instruction memory behind it, or there is no tag left to compare"
+
+- id: icache-4k-too-large-for-the-instruction-memory
+  when: "($Cache == 'I4K_4w_L32' or $Cache == 'I4K_4w_L32_D4K_4w_L32_WB') and ($MEM.imem_depth + 2) <= 12"
+  kind: illegal
+  message: "a 4 kib instruction cache needs more than 4 kib of instruction memory behind it, or there is no tag left to compare"
+
+- id: dcache-too-large-for-the-data-memory
+  when: "($Cache == 'D1K_1w_L16_WT' or $Cache == 'D1K_1w_L16_WT_B4' or $Cache == 'D1K_1w_L16_WB' or $Cache == 'I2K_2w_L32_D1K_1w_L16_WT_B4') and ($MEM.dmem_depth + 2) <= 10"
+  kind: illegal
+  message: "a 1 kib data cache needs more than 1 kib of data memory behind it, or there is no tag left to compare"
+
+- id: dcache-4k-too-large-for-the-data-memory
+  when: "($Cache == 'D4K_4w_L32_WB' or $Cache == 'I4K_4w_L32_D4K_4w_L32_WB') and ($MEM.dmem_depth + 2) <= 12"
+  kind: illegal
+  message: "a 4 kib data cache needs more than 4 kib of data memory behind it, or there is no tag left to compare"
+
+# 2.4 -- ALU x BranchPred
+#
+# Legal, and it may well win on area -- which is why it is dominated only for a
+# campaign that says so, with "exclusions: {apply: [illegal, duplicate,
+# dominated]}".
+
+- id: share-adder-with-static-branches
+  when: "$ALU.p_alu_share_adder == 1 and $BranchPred == 'Off' and $PipeCtrl.p_branch_stage == 0"
+  kind: dominated
+  message: "the branch comparators then share the adder and drive the front-end redirection straight from the RF slot: both worst contributions to the critical path at once"
