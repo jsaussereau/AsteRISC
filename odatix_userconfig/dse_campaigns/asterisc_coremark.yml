@@ -1,0 +1,101 @@
+##############################################
+# Odatix design space exploration campaign
+##############################################
+---
+# One campaign: which architectures are searched, what makes their designs
+# good, and how long to look for it. How the exploration is run -- how many
+# jobs at once, whether to ask before starting -- is in "dse_settings.yml",
+# which is also where this campaign is named for it to be run.
+#
+# The campaign is named after this file, and so is what it finds:
+# "results/dse/<this file's name>.yml".
+
+# what evaluating one design runs
+run:              custom_freq_synthesis # fmax_synthesis, custom_freq_synthesis or workflow
+tool:             vivado          # overridden by -t / --tool
+flow:             ""              # empty: the default flow of the tool
+
+# at what frequency, when what runs is a custom frequency synthesis
+#
+# It is the one run that is told a frequency -- an fmax synthesis looks for one
+# -- so it is the one run where the frequency is a choice like any other:
+# either it is made here, once, or it is left to the search, which then treats
+# it as one more axis of the space and gives each design its own.
+#
+# Saying nothing here leaves the frequencies of
+# "custom_freq_synthesis_settings.yml" alone, like every other setting of the
+# command being run.
+frequencies:
+  explore:        Yes     # yes: each design gets a frequency of its own, chosen in the range below
+  list:           []      # if 'explore' is no, every design is synthesized at each of those
+  range:                  # if 'explore' is yes, the frequencies the search may choose from
+    from:         40
+    to:           300
+    step:         5
+
+# what makes a design better than another
+#
+# Each objective is a metric to "min" or to "max". Nothing says how they
+# compare to each other -- a smaller design that runs slower is not worse than
+# a bigger one that runs faster, it is another trade-off -- so what comes back
+# is every design that nothing beats on all of them at once.
+#
+# "frequency" is where an fmax synthesis puts its answer; everything else is a
+# metric of the results file (LUT_count, Total_Power, ...), derived metrics
+# included.
+objectives:
+  - metric: CoreMark
+    goal: max
+  - metric: LUT_count
+    goal: min
+  - metric: Reg_count
+    goal: min
+  - metric: Total_Power
+    goal: min
+
+constraints:
+  - metric: Worst_Slack
+    min: 0
+
+# what this campaign leaves out of the space
+#
+# The rules themselves live next to the architectures, in their `_settings.yml`;
+# this only says which kinds of them this campaign wants. A "dominated"
+# exclusion is knowledge about an objective rather than about the design -- a
+# cache in front of a one cycle SRAM, a sequential shifter behind a deep EX --
+# so it is only applied when a campaign asks for it, as one looking for a
+# performance/area front does. See architectures/EXCLUSIONS.md.
+exclusions:
+  apply: [illegal, duplicate, dominated]
+
+# architectures to explore, one search each
+#
+# Every parameter domain of each core, minus the two axes that are not free
+# here: `Baseline/E` needs a firmware built for `-march=rv32e*`, and the CoreMark
+# binary does not fit in the small end of the `MEM` range. `Overlap` exists only
+# on the multi-cycle core, `Fwd` and `PipeCtrl` only on the pipelined one.
+architectures:
+  - AsteRISC-M/* + Baseline/I + MEM/1024I_1024D + MemLatency/SRAM1 + Cache/Off + ALU/* + Mul/* + BranchPred/* + Overlap/*
+  - AsteRISC-P/* + Baseline/I + MEM/1024I_1024D + MemLatency/SRAM1 + Cache/Off + ALU/* + Mul/* + BranchPred/* + Fwd/* + PipeCtrl/*
+
+# simulations every design is run through, before it is measured
+#
+# They are enqueued alongside the synthesis of the same batch, and what they
+# measure is brought onto the synthesis record by the derived metrics --
+# `CoreMark_Per_MHz` here, which `CoreMark` turns into a score at the frequency
+# the design was synthesized at. One simulation per design, shared by every
+# frequency it is evaluated at: a cycle count does not depend on the clock.
+#
+# Saying nothing here runs none of them, and the derived metrics then read
+# whatever was simulated beforehand.
+simulations:
+  - coremark
+
+# how the search looks for it
+search:
+  strategy:       bayesian # genetic, bayesian, random or exhaustive - overridden by --strategy
+  mode:           async
+  budget:         256      # designs evaluated at most, per architecture - overridden by --budget
+  batch:          12       # designs evaluated together, between two decisions
+  patience:       0        # stop after this many batches that do not improve (0: never)
+  seed:                    # empty: a different search every time
